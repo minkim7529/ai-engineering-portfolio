@@ -262,6 +262,26 @@ a:focus-visible, button:focus-visible {
 }
 .materials-link:hover { border-bottom-color: var(--teal); }
 .mini-card .materials-link { margin-top: 2px; }
+
+.shot {
+  position: relative;
+  z-index: 1;
+  max-width: var(--measure);
+  margin: 20px 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-raised);
+}
+.shot img { display: block; width: 100%; height: auto; }
+.shot figcaption {
+  padding: 8px 12px;
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", "Consolas", "Roboto Mono", monospace;
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  border-top: 1px solid var(--line);
+}
+.mini-card .shot { margin: 0; max-width: none; }
 .badge {
   display: inline-flex;
   align-items: center;
