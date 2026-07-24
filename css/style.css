@@ -251,6 +251,17 @@ a:focus-visible, button:focus-visible {
   font-size: 13px;
   color: var(--ink-soft);
 }
+.materials-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", "Consolas", "Roboto Mono", monospace;
+  font-size: 12px;
+  color: var(--teal);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.materials-link:hover { border-bottom-color: var(--teal); }
+.mini-card .materials-link { margin-top: 2px; }
 .badge {
   display: inline-flex;
   align-items: center;
