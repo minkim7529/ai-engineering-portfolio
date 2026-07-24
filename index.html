@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>김민석 — AI Engineering Portfolio</title>
+<meta name="description" content="로컬 LLM 보이스 컴패니언, 법률상담 AI 파인튜닝 등 AI 엔지니어링 프로젝트 포트폴리오" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- persistent site nav -->
+  <nav class="sitebar" id="sitebar">
+    <a href="#top" class="brand mono">김민석 / AI ENG</a>
+    <div class="links mono" id="navlinks">
+      <a href="#vtuber" data-section="vtuber">보이스 컴패니언</a>
+      <a href="#legal" data-section="legal">법률상담 AI</a>
+      <a href="#more" data-section="more">그 외 프로젝트</a>
+    </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="테마 전환" title="라이트/다크 테마 전환">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+    </button>
+  </nav>
+
+  <div class="page" id="top">
+
+    <header class="hero">
+      <div class="hero-eyebrow mono">AI ENGINEERING PORTFOLIO — 김민석</div>
+      <h1 class="hero-title">로컬 LLM을<br />실제로 굴려본 기록</h1>
+      <p class="hero-sub">
+        데모 단계를 넘어, 제한된 자원(로컬 7B 모델·8B 파인튜닝)에서 LLM이 실제로
+        오작동하는 지점을 찾고 고쳐본 과정을 정리했습니다.
+      </p>
+    </header>
+
+    <div class="signal-strip" aria-hidden="true">
+      <canvas id="signal"></canvas>
+    </div>
+
+    <p class="intro">
+      두 프로젝트는 접근이 다릅니다. 하나는 <strong>오픈소스 실시간 음성 AI 플랫폼</strong>을
+      가져와 로컬 7B 모델에 맞게 뜯어고친 것이고, 다른 하나는 <strong>Llama 3.1 8B를
+      직접 파인튜닝</strong>해 도메인 특화 모델을 학습시킨 팀 프로젝트입니다. 공통점은
+      둘 다 "모델이 그럴듯하게 답한다"에서 멈추지 않고, 작은 모델이 구체적으로
+      어떻게 망가지는지를 관찰하고 대응한 과정에 있습니다. 아래에는 수업·해커톤으로
+      진행한 네 프로젝트를 간단히 더 정리했습니다.
+    </p>
+
+    <!-- ================= PROJECT 1 ================= -->
+    <section class="project reveal" id="vtuber">
+      <div class="ghost-num mono" aria-hidden="true">01</div>
+      <div class="project-num mono">PROJECT 01</div>
+      <div class="project-head">
+        <div>
+          <h2>로컬 LLM 보이스 컴패니언</h2>
+          <div class="subtitle">Open-LLM-VTuber — Ollama vs Gemini backend experiments &amp; failure-mode engineering</div>
+        </div>
+        <span class="badge">개인 확장 개발</span>
+      </div>
+
+      <ul class="tags">
+        <li>Python · asyncio</li>
+        <li>FastAPI / WebSocket</li>
+        <li>Ollama (native API)</li>
+        <li>Gemini API</li>
+        <li>Edge TTS</li>
+        <li>Live2D</li>
+        <li>Prompt engineering</li>
+      </ul>
+
+      <div class="stats">
+        <div class="stat"><span class="n mono">252</span><span class="l">줄, Ollama 네이티브 백엔드 신규 작성</span></div>
+        <div class="stat"><span class="n mono">4</span><span class="l">가지 소형 모델 실패 유형에 대응</span></div>
+        <div class="stat"><span class="n mono">7B</span><span class="l">규모 로컬 모델 (Qwen계열) 기준 튜닝</span></div>
+        <div class="stat"><span class="n mono">Ollama ↔ Gemini</span><span class="l">같은 페르소나·프롬프트로 로컬/클라우드 백엔드 교체 실험</span></div>
+      </div>
+
+      <h3>배경</h3>
+      <p>
+        <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber" target="_blank" rel="noopener">Open-LLM-VTuber</a>는
+        LLM·ASR·TTS·Live2D를 묶어 음성으로 대화하는 오픈소스 데스크톱 컴패니언
+        프로젝트입니다. 완전히 무료로, 로컬에서 돌아가는 컴패니언을 만드는 것이
+        목표였기 때문에 LLM 백엔드를 Ollama(로컬)와 Gemini(무료 티어 클라우드)
+        사이에서 직접 바꿔가며 같은 페르소나 프롬프트로 답변 품질을 비교하는
+        실험부터 시작했습니다.
+      </p>
+
+      <h3>모델 백엔드 비교 실험 — Ollama vs Gemini</h3>
+      <p>
+        같은 캐릭터 프롬프트를 그대로 둔 채 LLM만 바꿔 끼우면서 답변 품질을
+        비교했습니다.
+      </p>
+      <ul class="list">
+        <li>
+          <b>Ollama(로컬 7B급 모델)</b> — 프롬프트를 여러 차례 고쳐써도 답변의
+          정확도와 자연스러움이 일정 수준 이상 올라가지 않았습니다. 뒤에 정리한
+          정체성 역전·한자 혼입·반복 발화 같은 실패 유형들도 결국 이 한계에서
+          비롯된 증상이었습니다.
+        </li>
+        <li>
+          <b>Gemini(클라우드 API)</b> — 똑같은 프롬프트에서 훨씬 정확하고 자연스러운
+          답변을 생성했습니다. 다만 무료 토큰/요청 한도 때문에 장시간 반복
+          실험을 이어가긴 어려웠습니다.
+        </li>
+      </ul>
+      <div class="callout">
+        <b>결론</b> — Open-LLM-VTuber 같은 오케스트레이션 레이어의 완성도는
+        결국 그 아래에서 돌아가는 LLM 자체의 능력에 상한선이 걸린다는 것을
+        직접 확인했습니다. 이후에 만든 프롬프트 개선·정규식 필터들은 이 상한선
+        안에서 품질을 최대한 끌어올리는 역할이지, 기반 모델의 한계 자체를
+        없애주지는 못합니다. 같은 이유로 TTS 엔진도 무료 티어 모델(Edge TTS)로
+        교체하는 실험을 성공적으로 마쳤고, 이 구조라면 나중에 원하는 보이스
+        모델을 직접 커스텀해서 얹을 수 있다는 것도 확인했습니다.
+      </div>
+
+      <h3>그 위에서 직접 만든 것</h3>
+      <ul class="list">
+        <li>
+          <b>Ollama 네이티브 백엔드 (<code class="inline">ollama_llm.py</code>, 신규 252줄)</b> —
+          OpenAI 호환 엔드포인트 대신 Ollama의 네이티브 <code class="inline">/api/chat</code>를
+          직접 사용해 <code class="inline">think:false</code>로 Qwen3 계열의 추론 트레이스를
+          확실히 꺼서 답변 하나당 150여 토큰을 절약했습니다. 스트리밍 파싱, 비전
+          모델용 이미지 다운스케일(최대 1024px), 모델 preload/keep-alive/unload
+          생명주기 관리, 툴 호출 시 OpenAI 호환 경로로의 폴백까지 포함합니다.
+        </li>
+        <li>
+          <b>발화 다양성 엔진</b> — 능동 발화(proactive-speak) 트리거마다 5가지 상황
+          변형 중 직전과 겹치지 않는 것을 골라 지시하고, 클라이언트별 최근 발화
+          3개를 기억해 "방금 한 말과 다르게 말해줘"를 프롬프트에 실시간으로
+          주입하는 구조를 만들었습니다.
+        </li>
+        <li>
+          <b>정체성 역전 가드</b> — 캐릭터가 스스로를 "오빠"라 칭하거나 유저를
+          "여동생"이라 부르는 등 고정된 관계 설정이 뒤집히는 현상을 정규식으로
+          문장 단위에서 잡아내 안전한 대사로 치환하는 데코레이터를 작성했습니다.
+        </li>
+        <li>
+          <b>출력 정제 파이프라인</b> — 양자화 모델이 간헐적으로 흘리는 한자/전각
+          문자, 금지된 이모지를 스트림 청크 단위로 제거하고, <code class="inline">&lt;think&gt;</code>
+          태그가 청크 경계에서 잘려도 안전하게 걸러내는 버퍼 기반 스트리퍼를
+          구현했습니다.
+        </li>
+      </ul>
+
+      <h3>관찰한 실패 유형과 대응</h3>
+      <div class="table-wrap">
+        <table class="data">
+          <thead>
+            <tr><th>증상</th><th>원인</th><th>대응</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>정체성 역전<br><span class="fix-tag">"내가 너의 오빠야"</span></td>
+              <td>프롬프트만으로는 긴 세션에서 관계 설정이 안정적으로 유지되지 않음</td>
+              <td>문장 완성 시점(TTS 직전)에 정규식으로 검출 → 안전 대사 3종 중 무작위 치환</td>
+            </tr>
+            <tr>
+              <td>한자/전각 문자 혼입<br><span class="fix-tag">"팀장那儿 갔다가"</span></td>
+              <td>양자화 모델의 잘 알려진 아티팩트, 프롬프트로 방지 불가</td>
+              <td>CJK 한자·전각 부호 대역을 스트림 청크마다 정규식 제거</td>
+            </tr>
+            <tr>
+              <td>발화 반복<br><span class="fix-tag">2턴 연속 "엄마랑 같이…"</span></td>
+              <td>상황 변형 5종을 단순 무작위 추출 시 20%가 직전과 동일 → 같은 지시엔 같은 응답</td>
+              <td>직전 인덱스를 제외한 랜덤 추출로 연속 중복을 원천 차단</td>
+            </tr>
+            <tr>
+              <td>금지 문구 명시가 역효과</td>
+              <td>"이 표현은 쓰지 마"처럼 금지어를 직접 인용하면 오히려 그 표현을 앵커링해 더 자주 재생산</td>
+              <td>금지 대신 원하는 스타일을 긍정문으로만 서술하도록 프롬프트 재작성</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <b>검증한 것 vs 버린 것</b> — 능동 발화의 표현 다양성을 위해 temperature를
+        기본값보다 올리는 실험(+0.3/+0.9, +0.1/+0.8)을 진행했으나, 낮은 폭에서도
+        이모지 열거·문장 붕괴 등 일관성 저하만 관찰되고 반복 감소 효과는
+        기본 temperature와 통계적으로 다르지 않았습니다. 위험 대비 이득이 없다고
+        판단해 되돌렸습니다 — 코드에 그대로 남겨 다음에 같은 실험을 반복하지
+        않도록 기록해 두었습니다.
+      </div>
+
+      <div class="limits">
+        <b>한계</b> — 위 대응은 모두 확인된 실패 패턴에 대한 규칙 기반(정규식) 사후
+        교정입니다. Gemini 비교 실험에서 드러났듯, 근본 원인은 소형 로컬 모델
+        자체의 명령 이행 한계이므로 더 강한 모델이나 파인튜닝으로 대체하는 것이
+        정공법입니다. 이 작업은 <em>지금 손에 있는 모델</em>에서 실사용 품질을
+        끌어올리기 위한 엔지니어링에 가깝습니다.
+      </div>
+    </section>
+
+    <!-- ================= PROJECT 2 ================= -->
+    <section class="project reveal" id="legal">
+      <div class="ghost-num mono" aria-hidden="true">02</div>
+      <div class="project-num mono">PROJECT 02</div>
+      <div class="project-head">
+        <div>
+          <h2>법률상담 AI</h2>
+          <div class="subtitle">The Legal Consultation AI — Llama 3.1 8B, LoRA fine-tuning</div>
+        </div>
+        <span class="badge">🏆 공학제 최우수상</span>
+      </div>
+
+      <ul class="tags">
+        <li>Llama 3.1 8B</li>
+        <li>LoRA / Unsloth</li>
+        <li>HF SFTTrainer</li>
+        <li>Google Colab Pro · A100</li>
+        <li>Gradio</li>
+        <li>5인 팀 · 대구대</li>
+      </ul>
+
+      <div class="stats">
+        <div class="stat"><span class="n mono">56,358</span><span class="l">건, 정제된 법률 질의응답 학습 데이터</span></div>
+        <div class="stat"><span class="n mono">2</span><span class="l">Epoch, 약 4시간 30분 학습 (A100)</span></div>
+        <div class="stat"><span class="n mono">1.5e-5</span><span class="l">~2e-5, 가장 안정적이었던 학습률 구간</span></div>
+        <div class="stat"><span class="n mono">A100</span><span class="l">Colab Pro GPU로 학습 진행</span></div>
+      </div>
+
+      <h3>배경</h3>
+      <p>
+        변호사 상담은 30분에 5~10만 원, 사건 선임은 최소 100만 원대의 비용이
+        들고 상담 시간도 평일 근무시간에 묶여 있습니다. 5인 팀으로 진행한
+        졸업작품에서, 민사법을 중심으로 Llama 3.1 8B를 파인튜닝해 시간·비용
+        제약 없이 1차 법률 자문을 받을 수 있는 시스템을 만들고, 그 결과를
+        논문으로 작성해 대구대학교 공학제에서 최우수상을 받았습니다.
+      </p>
+
+      <h3>파이프라인</h3>
+      <table class="spectable">
+        <tr><th>데이터</th><td>Hugging Face 공개 한국어 법률 QA 코퍼스를 원본으로, 질문과 무관한 사연·공감 문구·이모티콘 등 노이즈를 제거해 56,358쌍의 지시문-응답 데이터셋 구축</td></tr>
+        <tr><th>학습 기법</th><td>전체 가중치 대신 저랭크 행렬만 학습하는 LoRA + Hugging Face SFTTrainer, Unsloth로 학습 가속</td></tr>
+        <tr><th>하이퍼파라미터</th><td>학습률 5e-5에서 점진 감소 스케줄, r·lora_alpha는 선행 연구 설정을 참고해 조정</td></tr>
+        <tr><th>후처리</th><td><code class="inline">difflib.SequenceMatcher</code> 기반 문장 정제 모듈 — 반복 출력 구간을 유사도로 탐지해 제거하고 문단 구성을 정리</td></tr>
+        <tr><th>서빙</th><td>Gradio 웹 인터페이스로 배포 (Colab 학습 → Hugging Face 모델 업로드 → Google Drive 연동 실행)</td></tr>
+      </table>
+
+      <h3>Epoch 스윕 — 왜 2회인가</h3>
+      <div class="sweep">
+        <div class="cell">
+          <div class="ep mono">EPOCH 1</div>
+          <div class="verdict">학습 부족</div>
+          <div class="desc">응답 일관성이 낮음</div>
+        </div>
+        <div class="cell chosen">
+          <div class="ep mono">EPOCH 2</div>
+          <div class="verdict">채택</div>
+          <div class="desc">가장 안정적이고 명확한 출력</div>
+        </div>
+        <div class="cell">
+          <div class="ep mono">EPOCH 3</div>
+          <div class="verdict">과적합</div>
+          <div class="desc">일부 응답이 불안정하게 출력</div>
+        </div>
+      </div>
+
+      <div class="limits">
+        <b>한계 (논문에서 직접 밝힌 내용)</b> — 8B 규모 모델과 5만여 건 데이터로는
+        상용 대형 챗봇 수준의 문장 완성도에는 못 미치며, 학습 데이터가 민사법
+        위주라 형사·행정·가사 분야는 다루지 못합니다. 결과는 참고용이며 실제
+        법적 판단이나 소송 대리를 대체하지 않습니다. 후속 과제로 70B/405B급
+        모델 확장, 사실 검증 레이어, 음성 입력, 판례 DB 연동을 논문에 명시했습니다.
+      </div>
+
+      <div class="callout">
+        <b>공동 저자</b> — 김지환, 김두한, 김민석, 신영훈, 김희철 5인 팀 프로젝트로
+        수행하며 논문을 작성했습니다(학술지 게재 여부는 별도 확인 중).
+        본인 담당 파트: <span class="fill-placeholder" contenteditable="true" title="클릭해서 직접 수정하세요">여기를 클릭해서 직접 맡은 부분을 채워주세요 (예: 데이터 전처리 / 학습 스크립트 / Gradio 배포)</span>
+      </div>
+    </section>
+
+    <!-- ================= MORE PROJECTS ================= -->
+    <section class="more reveal" id="more">
+      <div class="more-head">
+        <div class="project-num mono">03 – 06</div>
+        <h2>그 외 프로젝트</h2>
+        <p>
+          수업·해커톤·개인 학습으로 진행한 프로젝트입니다. 두 케이스 스터디만큼
+          깊게 다루진 않았지만, 팀 구성과 본인 역할, 실제 수치를 그대로 남겼습니다.
+        </p>
+      </div>
+
+      <div class="mini-grid">
+
+        <!-- 졸음방지 독서대 -->
+        <article class="mini-card" id="drowsy">
+          <div class="mh">
+            <div>
+              <h4>졸음방지 독서대</h4>
+              <div class="role-tag">2인 팀 (7조) · 본인: AI 모델 개발</div>
+            </div>
+            <span class="mini-badge course">수업 프로젝트</span>
+          </div>
+          <ul class="tags">
+            <li>Arduino UNO</li>
+            <li>Dlib</li>
+            <li>CNN (PyTorch)</li>
+          </ul>
+          <p class="desc">
+            Dlib으로 얼굴에서 눈 영역을 검출하고, 직접 설계한 CNN(Conv-ReLU-Pool ×3 +
+            Linear ×2, 총 88만 파라미터)으로 눈 뜸/감음을 이진 분류해 졸음을 감지.
+            아두이노 서보모터로 독서대 각도를 조절하고, 온습도·조도 센서로 졸음을
+            유발하는 환경 조건까지 함께 측정하도록 브레드보드를 직접 설계했습니다.
+          </p>
+          <div class="metric">검증 정확도 99.65%</div>
+          <p class="note">
+            발표 자료에 스스로 명시한 한계: 이미지가 작고 이진 분류라 정확도가
+            높게 나온 것으로 분석되며, 마스크 착용 시에는 인식이 되지 않습니다.
+          </p>
+        </article>
+
+        <!-- 피부질환 분류 -->
+        <article class="mini-card" id="skin">
+          <div class="mh">
+            <div>
+              <h4>피부질환 분류 알고리즘</h4>
+              <div class="role-tag">3인 팀 · 본인: 데이터 정제·모델 학습</div>
+            </div>
+            <span class="mini-badge course">수업 프로젝트</span>
+          </div>
+          <ul class="tags">
+            <li>PyTorch</li>
+            <li>Custom CNN</li>
+            <li>Kaggle Dataset</li>
+          </ul>
+          <p class="desc">
+            여드름·습진·피부암·정상 피부 4종을 분류하는 CNN을 처음부터 설계했습니다.
+            ResNet 스타일의 skip-connection 블록(Convbox)을 4개 층으로 쌓고, 배치
+            사이즈(32/64/128)·에폭(5 단위)·드롭아웃 조합을 직접 스윕하며 과적합
+            구간(30 epoch 이상)과 최적점(20 epoch, batch 64)을 실측으로 찾았습니다.
+          </p>
+          <div class="metric">4-class 분류 · Kaggle skin-disease dataset</div>
+          <p class="note">
+            의료 진단 대체가 아닌 학습용 분류기이며, 클래스당 약 2,500장 규모의
+            공개 데이터셋으로 학습했습니다.
+          </p>
+        </article>
+
+        <!-- 설스터디 해커톤 -->
+        <article class="mini-card" id="hackathon">
+          <div class="mh">
+            <div>
+              <h4>설스터디</h4>
+              <div class="role-tag">6인 팀 · 본인: 프론트엔드</div>
+            </div>
+            <span class="mini-badge hackathon">해커톤 참가작</span>
+          </div>
+          <ul class="tags">
+            <li>Next.js 14</li>
+            <li>Express · Prisma</li>
+            <li>PostgreSQL</li>
+          </ul>
+          <p class="desc">
+            블레이버스 제4회 MVP 개발 해커톤에 출품한 수능 국영수 학습 코칭
+            플랫폼. 멘티용 일일/주간/월간 플래너·과제 제출, 멘토용 학생 관리·
+            피드백·학습지 배포 기능을 MVP 범위로 구현하고 Vercel·Railway·Neon
+            조합으로 실제 배포까지 진행했습니다. 본인은 멘티/멘토 페이지
+            프론트엔드(Next.js App Router, TailwindCSS, Zustand)를 담당했습니다.
+          </p>
+          <div class="metric">AI 프로젝트는 아니지만 팀 풀스택 개발 사례로 포함</div>
+        </article>
+
+        <!-- Goods Shop -->
+        <article class="mini-card" id="goodsshop">
+          <div class="mh">
+            <div>
+              <h4>Goods Shop 웹 프로젝트</h4>
+              <div class="role-tag">개인 프로젝트</div>
+            </div>
+            <span class="mini-badge course">수업 과제</span>
+          </div>
+          <ul class="tags">
+            <li>Java 웹</li>
+            <li>MySQL</li>
+            <li>ERD 설계</li>
+          </ul>
+          <p class="desc">
+            캐릭터 이모티콘 굿즈를 온라인으로 판매하는 쇼핑몰을 약 한 달간 혼자
+            기획·설계·구현했습니다. 회원가입/로그인, 장바구니와 결제 금액 계산,
+            게시판, 키워드 매칭 기반 챗봇 프로토타입까지 포함하며, ERD·클래스
+            설계부터 초반 웹서버 미동작 문제의 원인 파악까지 전 과정을 단독으로
+            진행했습니다.
+          </p>
+          <div class="metric">기획 → ERD → 구현 → 배포 전 과정 단독 수행</div>
+          <p class="note">챗봇은 LLM이 아닌 규칙/키워드 기반 프로토타입입니다.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <footer>
+      <span class="mono">김민석 · AI Engineering Portfolio</span>
+      <span class="mono" id="year"></span>
+    </footer>
+
+  </div>
+
+  <button class="to-top" id="toTop" aria-label="맨 위로">↑</button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
