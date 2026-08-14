@@ -32,13 +32,6 @@ const NAV_GROUPS = [
       { slug: "skin-disease-classifier", title: "피부질환 분류 알고리즘", repo: "skin-disease-classifier" },
     ],
   },
-  {
-    label: "AI 학습",
-    items: [
-      { slug: "rag", title: "RAG" },
-      { slug: "vision-ai", title: "Vision AI" },
-    ],
-  },
 ];
 
 (() => {

@@ -45,6 +45,13 @@
           <li>4인 팀 · 대구대</li>
         </ul>
 
+        <div class="callout">
+          <b>학술지 게재</b> — 이 작품은 논문으로 정리되어 대구대학교
+          정보통신연구소 학술지 《정보통신연구》 제17집 제1호(Vol. 20 No. 2,
+          2025)에 게재되었습니다. 저자: 김지환·김두한·김민석·신영훈(지도교수
+          김희철), 국문 요약과 영문 Abstract를 함께 수록했습니다.
+        </div>
+
         <div class="stats">
           <div class="stat"><span class="n mono">53,480</span><span class="l">건, 정제된 민·형사 법률 질의응답 학습 데이터</span></div>
           <div class="stat"><span class="n mono">1,671</span><span class="l">step, 최종 학습(1 epoch) 소요 스텝</span></div>
@@ -55,7 +62,11 @@
         <h2>개요</h2>
         <p>
           변호사 상담은 30분에 5~10만 원, 사건 선임은 최소 100만 원대의 비용이
-          들고 상담 시간도 평일 근무시간에 묶여 있습니다. 일반적인 법률
+          들고 상담 시간도 평일 근무시간에 묶여 있습니다. 한국가정법률상담소의
+          2024년 통계를 보면 한 해 동안 53,473건의 법률상담이 이뤄졌는데, 이
+          중 면접상담의 98.4%(21,929건)가 가사·민사 사건이었습니다 — 대부분의
+          법률상담이 여전히 상담원·변호사와의 직접 대면에 의존하고 있다는
+          뜻입니다. 일반적인 법률
           서비스가 고비용·긴 대기시간·복잡한 절차로 이용자에게 부담을 준다는
           문제의식에서, 4인 팀(김지환·김두한·김민석·신영훈, 지도교수 김희철)으로
           진행한 졸업작품에서 Llama 3.1을 한국어 법률 QA 데이터로 파인튜닝해
@@ -148,6 +159,26 @@
           <li>Grouped Query Attention(GQA)으로 대규모 모델에서도 연산 효율성과 메모리 최적화를 함께 확보</li>
           <li>RoPE(회전 위치 임베딩)로 긴 문맥의 위치 정보를 학습하며 최대 128K 토큰 길이까지 지원</li>
         </ul>
+        <figure class="shot">
+          <img src="../img/legal-ai-model-architecture.jpg" alt="Llama 3.1 모델 구조 — 입력 토큰이 임베딩을 거쳐 Self-attention과 Feedforward network 블록을 반복 통과한 뒤 오토리그레시브 디코딩으로 출력 토큰을 생성하는 구조" loading="lazy" />
+          <figcaption>그림 1. Llama 3.1 모델 구조 — 논문에 수록한 다이어그램</figcaption>
+        </figure>
+
+        <h3>왜 Llama 3.1을 선택했나 — 모델별 성능 비교</h3>
+        <p>
+          Llama 2 7B, Llama 3 8B, Mistral 7B, Gemma 7B 네 모델을 일반 언어능력
+          (General)·상식 추론(Common sense)·지식(Knowledge)·수학 및 논리
+          추론(Math and Reasoning)·독해력(Reading Comprehension)·코드 생성(Code)
+          여섯 항목으로 비교했습니다. Llama 3 8B가 거의 모든 항목에서 가장
+          우수했고, 특히 지식·상식 영역에서 격차가 컸습니다. 동일한 약 80억
+          파라미터 규모를 유지하면서도 이전 세대·동급 모델보다 전반적으로
+          나은 성능을 보였다는 점이 법률 상담처럼 복잡한 문맥 이해와 논리적
+          추론이 필요한 과제에 적합하다고 판단한 근거입니다.
+        </p>
+        <figure class="shot">
+          <img src="../img/legal-ai-model-comparison.jpg" alt="Llama 2 7B, Llama 3 8B, Mistral 7B, Gemma 7B의 General, Commonsense, Knowledge, Math and Reasoning, Reading Comprehension, Code 항목별 성능을 비교한 막대그래프 — Llama 3 8B가 대부분의 항목에서 가장 높은 점수를 기록" loading="lazy" style="max-width:420px" />
+          <figcaption>그림 2. 모델별 성능 비교 — Llama 3 8B가 대부분의 항목에서 우위</figcaption>
+        </figure>
 
         <h2>모델 훈련 및 검증</h2>
         <p>
@@ -158,6 +189,10 @@
           얻었습니다. 에폭 수는 1·2·3회를 비교해 2회에서 가장 안정적이고
           명확한 출력을 얻는다는 것을 초기 실험으로 확인했습니다.
         </p>
+        <figure class="shot">
+          <img src="../img/legal-ai-lora-diagram.jpg" alt="LoRA 원리 다이어그램 — 사전학습된 가중치 W는 고정한 채, 저차원 행렬 A(정규분포로 초기화)와 B(0으로 초기화)의 곱만 학습해 원래 가중치에 더해주는 구조" loading="lazy" style="max-width:320px" />
+          <figcaption>LoRA — 전체 가중치 W는 고정하고, 저랭크 행렬 A·B만 학습해 더해주는 구조</figcaption>
+        </figure>
         <div class="sweep">
           <div class="cell">
             <div class="ep mono">EPOCH 1</div>
@@ -355,6 +390,30 @@ def truncate_incomplete_sentences(text):
           최적화하고, 다양한 법률 분야로 데이터와 기능을 확장하는 것을 다음
           단계로 계획했습니다.
         </div>
+
+        <h2>참고문헌</h2>
+        <ul class="paper-list">
+          <li>
+            <span class="paper-title">2024년 한국가정법률상담소 상담 통계</span>
+            <span class="paper-meta">한국가정법률상담소 — 법률상담 수요와 접근성 문제의 근거 데이터로 인용</span>
+          </li>
+          <li>
+            <span class="paper-title">Introducing Llama 3.1: Our most capable models to date</span>
+            <span class="paper-meta">Meta AI Blog, 2024</span>
+          </li>
+          <li>
+            <span class="paper-title">The Llama 3 Herd of Models</span>
+            <span class="paper-meta">Touvron et al., Meta AI, 2024 · <a href="https://arxiv.org/abs/2407.21783" target="_blank" rel="noopener">arXiv:2407.21783</a></span>
+          </li>
+          <li>
+            <span class="paper-title">LoRA: Low-Rank Adaptation of Large Language Models</span>
+            <span class="paper-meta">Hu et al., 2021 · <a href="https://arxiv.org/abs/2106.09685" target="_blank" rel="noopener">arXiv:2106.09685</a></span>
+          </li>
+          <li>
+            <span class="paper-title">Finetuned Language Models Are Zero-Shot Learners</span>
+            <span class="paper-meta">Wei et al., Google Research, 2021 · <a href="https://arxiv.org/abs/2109.01652" target="_blank" rel="noopener">arXiv:2109.01652</a> — Instruction Tuning 근거 논문</span>
+          </li>
+        </ul>
 
         <h2>느낀 점</h2>
         <p>
