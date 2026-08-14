@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>법률상담 AI — 김민석 포트폴리오</title>
+<meta name="description" content="Llama 3.1 8B를 LoRA로 파인튜닝해 만든 법률상담 AI — 4인 팀 졸업작품, 대구대학교 공학제 최우수상" />
+<link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" />
+<link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <nav class="sitebar" id="sitebar">
+    <a href="../index.html" class="brand">김민석 / AI ENGINEER</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="테마 전환" title="라이트/다크 테마 전환">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+    </button>
+  </nav>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebarMount" data-base="../" data-active="legal-consultation-ai"></aside>
+
+    <main class="main">
+      <a class="back-link" href="../index.html">← 홈으로</a>
+
+      <article class="project-page reveal">
+        <p class="project-kicker">PROJECT · legal-consultation-ai</p>
+        <h1>법률상담 AI</h1>
+        <p class="project-lede">Llama 3.1 8B를 LoRA로 파인튜닝해 만든 법률상담 AI — 4인 팀 졸업작품, 대구대학교 공학제 최우수상</p>
+        <div class="project-meta">
+          <a href="https://github.com/minkim7529/legal-consultation-ai" class="btn primary" target="_blank" rel="noopener">GitHub 저장소 (노트북·보고서·논문) →</a>
+          <span class="badge">🏆 공학제 최우수상</span>
+        </div>
+
+        <ul class="tags">
+          <li>Llama 3.1 8B</li>
+          <li>LoRA / Unsloth</li>
+          <li>HF SFTTrainer</li>
+          <li>Google Colab Pro · A100</li>
+          <li>Gradio</li>
+          <li>4인 팀 · 대구대</li>
+        </ul>
+
+        <div class="stats">
+          <div class="stat"><span class="n mono">53,480</span><span class="l">건, 정제된 민·형사 법률 질의응답 학습 데이터</span></div>
+          <div class="stat"><span class="n mono">1,671</span><span class="l">step, 최종 학습(1 epoch) 소요 스텝</span></div>
+          <div class="stat"><span class="n mono">1.5e-5</span><span class="l">최종 학습률, LoRA r=16</span></div>
+          <div class="stat"><span class="n mono">A100</span><span class="l">40GB VRAM, Colab Pro GPU로 학습 진행</span></div>
+        </div>
+
+        <h2>개요</h2>
+        <p>
+          변호사 상담은 30분에 5~10만 원, 사건 선임은 최소 100만 원대의 비용이
+          들고 상담 시간도 평일 근무시간에 묶여 있습니다. 일반적인 법률
+          서비스가 고비용·긴 대기시간·복잡한 절차로 이용자에게 부담을 준다는
+          문제의식에서, 4인 팀(김지환·김두한·김민석·신영훈, 지도교수 김희철)으로
+          진행한 졸업작품에서 Llama 3.1을 한국어 법률 QA 데이터로 파인튜닝해
+          시간·비용 제약 없이 1차 법률 자문을 받을 수 있는 챗봇을 만들었습니다.
+          판례나 유사 사례를 참고해 답변하는 기능도 목표로 삼았습니다. 그
+          결과를 보고서로 작성해 대구대학교 공학제에서 최우수상을 받았습니다.
+        </p>
+
+        <h2>진행 과정 — 작품 제작 흐름</h2>
+        <p>
+          Llama 3.1 모델을 로드하고, Hugging Face에 올린 법률 QA 데이터셋을
+          불러와 모델을 학습시킨 뒤 학습된 모델을 저장하고, 이를 웹 프로그래밍·
+          프론트엔드 구현과 연결해 실제로 질문을 입력하면 답변을 받을 수 있는
+          형태까지 만드는 순서로 진행했습니다.
+        </p>
+        <ul class="list">
+          <li>Llama 3.1 모델 로드 + Hugging Face 데이터셋 로드</li>
+          <li>모델 학습(LoRA 파인튜닝)</li>
+          <li>학습 모델 저장 및 Hugging Face 업로드</li>
+          <li>Gradio 기반 웹 UI 구현 및 실시간 시연</li>
+        </ul>
+
+        <h2>개발 및 실행 환경</h2>
+        <table class="spectable">
+          <tr><th>하드웨어</th><td>Google Colab Pro, A100 GPU(VRAM 40GB), RAM 83GB</td></tr>
+          <tr><th>Python</th><td>3.10</td></tr>
+          <tr><th>패키지</th><td>Unsloth(FastLanguageModel), Hugging Face SFTTrainer, Transformers, Torch, TorchVision, Wandb, Gradio</td></tr>
+          <tr><th>Tools</th><td>Google Colab, Visual Studio, Jupyter Notebook, IntelliJ, Spring Boot, Bootstrap, CSS, HTML, JavaScript</td></tr>
+        </table>
+        <p>
+          학습 가속에는 Unsloth를 사용했습니다. Colab 무료/Pro GPU에서도 Llama 3
+          8B급 파인튜닝이 가능하도록 만들어주는 프레임워크로, 공식 벤치마크
+          기준 학습 속도를 약 4~5배 끌어올리고 VRAM 사용량도 크게 줄여줍니다.
+          Supervised fine-tuning 자체는 Hugging Face TRL의
+          <code class="inline">SFTTrainer</code> 계열 도구로 진행했는데, 처음부터
+          학습하는 범용 <code class="inline">Trainer</code>와 달리 사전학습된 모델을
+          대화형 지시문-응답 형식으로 가볍게 지도학습시키는 데 특화되어 있고,
+          LoRA와 결합하면 적은 데이터로도 빠르게 학습할 수 있습니다.
+        </p>
+
+        <h2>개발 업무 분장</h2>
+        <table class="data">
+          <thead><tr><th>담당</th><th>역할</th></tr></thead>
+          <tbody>
+            <tr><td>김지환 (팀장)</td><td>프로젝트 관리, 유사 프로젝트·작품 탐색, 모델/데이터셋 조사, 학습 모델 코딩, 웹 프로그래밍 개발</td></tr>
+            <tr><td>김두한</td><td>모델/데이터셋 조사, 학습 모델 코딩, 모델 학습 및 테스트, 웹 프로그래밍 개발</td></tr>
+            <tr><td><b>김민석</b></td><td><b>모델/데이터셋 조사, 학습 모델 코딩, 모델 성능 개선 및 분석, 웹 프로그래밍 개발</b></td></tr>
+            <tr><td>신영훈</td><td>모델 조사, 학습 모델 코딩, 모델 성능 개선 및 분석</td></tr>
+          </tbody>
+        </table>
+
+        <h2>학습 데이터 구축</h2>
+        <p>
+          Hugging Face에 공개된 한국어 법률 질문-답변 데이터셋
+          (<code class="inline">zzunyang/LawQA_LawSee</code>)을 원본으로 삼았습니다.
+          질문-답변 56,358세트 규모의 원본 데이터에는 사건과 무관한 하소연이나
+          공감 문구가 섞여 있어, ChatGPT를 활용해 대량의 데이터를 자동으로
+          요약·정제하는 방식으로 핵심 질문과 결론 위주의 지시문-응답 쌍을
+          재생성했습니다. 예를 들어 "남편폰으로 배달시킨다고 만지고 있었는데
+          이번엔 사장님들이랑 올거야? 이런 카톡이 오더라고요… 위자료 받고
+          싶은데 어떡해야 하는지요?"처럼 감정적 서술이 긴 원문을, "남편이
+          유부남임을 숨기고 술집 여성과 연락하며 외도를 했습니다. 유책배우자
+          이혼소송으로 위자료를 받고 싶은데 어떻게 해야 하나요?"처럼 핵심만
+          남긴 질문-답변 쌍으로 정제했습니다. 이렇게 정제한 데이터 중
+          최종적으로 53,480건(민사·형사 법률 질문-답변)을 학습에 사용했고,
+          Hugging Face에 <code class="inline">kms7529/Law_dataset</code>으로
+          업로드해 학습 노트북에서 <code class="inline">load_dataset</code>으로
+          바로 불러오도록 구성했습니다.
+        </p>
+        <p>
+          학습 데이터는 <code class="inline">instruction</code>(질문) /
+          <code class="inline">input</code> / <code class="inline">output</code>(답변) 세 필드로 구성된
+          JSONL 형식입니다. 이 형식을 쓴 이유는 Instruction Tuning 때문입니다 —
+          사전학습만 마친 모델은 다음 단어를 예측할 뿐 사용자의 지시 의도를
+          이해하지 못하는데, 다양한 지시문-응답 쌍으로 추가 학습(Instruction
+          Tuning)을 하면 자연어로 질문해도 의도에 맞는 답변을 하도록 만들 수
+          있습니다.
+        </p>
+
+        <h2>모델 아키텍처 — Llama 3.1</h2>
+        <p>
+          Meta가 공개한 오픈소스 LLM으로 8B/70B 파라미터 버전이 있으며, 오픈
+          모델임에도 GPT-4급 성능을 지향합니다. Hugging Face·AWS·Azure·NVIDIA와의
+          협업으로 누구나 연구·상업적으로 활용할 수 있게 배포되어 있고,
+          커스터마이징과 파인튜닝을 통한 특화 활용에 적합하게 설계되어 있어
+          도메인 특화 챗봇을 만들기에 적당하다고 판단해 선택했습니다.
+        </p>
+        <ul class="list">
+          <li>decoder-only 구조의 Transformer 계열 모델</li>
+          <li>Grouped Query Attention(GQA)으로 대규모 모델에서도 연산 효율성과 메모리 최적화를 함께 확보</li>
+          <li>RoPE(회전 위치 임베딩)로 긴 문맥의 위치 정보를 학습하며 최대 128K 토큰 길이까지 지원</li>
+        </ul>
+
+        <h2>모델 훈련 및 검증</h2>
+        <p>
+          <code class="inline">unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit</code>
+          4bit 모델을 Unsloth의 <code class="inline">FastLanguageModel</code>로 불러온 뒤
+          LoRA를 적용했습니다. 학습률은 선행 연구 사례를 참고해 5e-5에서 점차
+          낮춰가며 비교했고, 1.5e-5~2e-5 구간에서 가장 안정적인 학습 결과를
+          얻었습니다. 에폭 수는 1·2·3회를 비교해 2회에서 가장 안정적이고
+          명확한 출력을 얻는다는 것을 초기 실험으로 확인했습니다.
+        </p>
+        <div class="sweep">
+          <div class="cell">
+            <div class="ep mono">EPOCH 1</div>
+            <div class="verdict">학습 부족</div>
+            <div class="desc">응답 일관성이 낮음</div>
+          </div>
+          <div class="cell chosen">
+            <div class="ep mono">EPOCH 2</div>
+            <div class="verdict">채택</div>
+            <div class="desc">가장 안정적이고 명확한 출력</div>
+          </div>
+          <div class="cell">
+            <div class="ep mono">EPOCH 3</div>
+            <div class="verdict">과적합</div>
+            <div class="desc">일부 응답이 불안정하게 출력</div>
+          </div>
+        </div>
+        <p>
+          다만 실제로 Hugging Face에 최종 업로드하고 Gradio 데모에 연결한
+          모델은, 정제된 데이터셋(53,480건)을 기준으로 학습 시간을 고려해
+          1 epoch(총 1,671 step)만 학습한 버전입니다. 아래는 실제로 실행한
+          학습 노트북의 핵심 셀입니다.
+        </p>
+        <div class="codeblock">
+          <span class="label">법률 데이터셋 학습.ipynb — LoRA 적용 및 학습 설정</span>
+          <pre><code>model = FastLanguageModel.get_peft_model(
+    model,
+    r=16,
+    lora_alpha=16,
+    lora_dropout=0.05,     # Dropout 추가 (Overfitting 방지)
+    target_modules=["q_proj", "v_proj"],
+    use_rslora=False,
+    bias="none",
+)
+
+training_args = TrainingArguments(
+    output_dir="./llama3-law-finetune5",
+    per_device_train_batch_size=8,
+    gradient_accumulation_steps=4,   # 유효 배치 크기 = 8 x 4 = 32
+    num_train_epochs=1,
+    learning_rate=1.5e-5,
+    bf16=True,
+    optim="paged_adamw_8bit",
+    report_to="none",
+    remove_unused_columns=False,
+)
+
+trainer = Trainer(
+    model=model,
+    train_dataset=dataset,
+    args=training_args,
+    data_collator=unsloth_data_collator,
+)
+trainer.train()
+# TrainOutput(global_step=1671, training_loss=1.754, epoch=0.9999)
+# train_runtime: 7248.8초 (약 2시간), 53,480개 예시 · 1 epoch</code></pre>
+        </div>
+        <p>
+          학습 가능 파라미터는 전체 80억 개 중 LoRA 어댑터 6,815,744개(약
+          0.09%)뿐이라, 저랭크 행렬만 업데이트하면서도 학습이 가능했습니다.
+        </p>
+
+        <h2>핵심 코드 — 응답 후처리 및 서빙</h2>
+        <p>
+          학습만으로는 답변에 법률과 무관한 내용이 섞이거나, 문장이 반복되거나,
+          끝맺지 못한 채 잘리는 문제가 있었습니다. 실제 Gradio 서빙
+          노트북(<code class="inline">법률상담사이트 최종.ipynb</code>)에 작성한
+          후처리 함수들입니다.
+        </p>
+        <div class="codeblock">
+          <span class="label">응답 정제 — 유사 문장 제거 · 불완전 문장 절단</span>
+          <pre><code>from difflib import SequenceMatcher
+import re
+
+# 두 문장의 유사도가 임계값을 넘으면 같은 문장으로 판단
+def is_similar(a, b, threshold=0.85):
+    return SequenceMatcher(None, a, b).ratio() > threshold
+
+# 반복 단어·짧은 조사 문장을 정리
+def clean_sentence(sentence):
+    sentence = sentence.strip()
+    sentence = re.sub(r'(\b\w+\b)(\s*에 대한\s*\1)+', r'\1', sentence)
+    sentence = re.sub(r'\b(\w+)\s+\1\b', r'\1', sentence)
+    if len(sentence) < 6 or sentence.endswith(("의", "에", "는", "은", "가", "로", "과", ",")):
+        return None
+    return sentence
+
+# 문장 단위로 쪼갠 뒤 중복 제거하며 줄바꿈으로 재조립
+def format_sentences_with_linebreaks(text):
+    text = re.sub(r'\s+', ' ', text.strip())
+    sentences = re.split(r'(?&lt;=[.!?])\s+', text)
+    cleaned_sentences = []
+    for s in sentences:
+        cleaned = clean_sentence(s)
+        if cleaned and not any(is_similar(cleaned, c) for c in cleaned_sentences):
+            cleaned_sentences.append(cleaned)
+    return "\n".join(cleaned_sentences)
+
+# 마침표로 끝나지 않은 문장은 마지막 완결 문장까지만 남김
+def truncate_incomplete_sentences(text):
+    if not re.search(r'[.!?]"?$', text.strip()):
+        last_period = text.strip().rfind(".")
+        if last_period != -1:
+            return text[:last_period + 1]
+    return text</code></pre>
+        </div>
+        <div class="codeblock">
+          <span class="label">Gradio 서빙 함수</span>
+          <pre><code>def law_consultation_gpt(user_message, chat_history):
+    prompt = f"[사용자]: {user_message}\n[AI 법률상담사]:"
+    inputs = tokenizer(prompt, return_tensors="pt").to("cuda")
+    outputs = model.generate(
+        **inputs,
+        max_new_tokens=800,
+        temperature=0.7,
+        top_p=0.9,
+        repetition_penalty=1.05,
+    )
+    response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    if "[AI 법률상담사]:" in response:
+        response = response.split("[AI 법률상담사]:")[-1].strip()
+    response = truncate_incomplete_sentences(response)
+    response = format_sentences_with_linebreaks(response)
+
+    chat_history = chat_history or []
+    chat_history.append((user_message, response))
+    return chat_history, chat_history</code></pre>
+        </div>
+        <p>
+          정제 전(학습 직후 <code class="inline">generate_response</code> 원본 출력)과
+          정제 후를 비교하면 효과가 뚜렷합니다. 예를 들어 "상속 포기 절차를
+          알려주세요"라는 같은 질문에 학습 직후 모델은 아래처럼 코드 블록이
+          섞이거나 맥락에서 벗어난 문장을 출력했습니다.
+        </p>
+        <div class="codeblock">
+          <span class="label">정제 전 — 실제 원본 출력 예시 (일부 발췌)</span>
+          <pre><code>### Instruction:
+상속 포기 절차에 대해 알려주세요.
+
+### Response:
+1. 상속 받는 사람과 법원에서 상속을 승인한 담당관이 함께 모여서
+   상속의 재산분배를 결정한다.
+...
+4. 상속인은 죽음과 동시에 모든 권리와 의무가 종료되고,
+   유류는 공적인 것으로 간주된다
+
+### Output:
+상속인은 사망하고 나면 상속인을 대신해서 그의 재산을 관리하게 됩니다.
+그러나 상속받는 사람은 상속인을 대신하면서도... (문장이 중간에 끊김)</code></pre>
+        </div>
+        <p>
+          위와 같이 지시문 형식 태그가 답변에 그대로 노출되거나 문장이
+          끊기는 문제를, 세 함수를 거친 뒤에는 아래 실제 데모 화면처럼 완결된
+          문장이 줄바꿈된 목록 형태로 정리해 출력합니다.
+        </p>
+
+        <h2>결과물 — 실제 데모 화면</h2>
+        <figure class="shot">
+          <img src="../img/legal-ai-demo.png" alt="AI 변호사 상담 시스템 실제 데모 화면 — '이혼 시 재산 분할의 기준은 어떻게 되나요?' 질문에 대한 실제 모델 답변" loading="lazy" />
+          <figcaption>Gradio로 배포한 실제 데모 화면 — 후처리를 거친 실제 모델 출력</figcaption>
+        </figure>
+        <p>
+          위 화면은 "이혼 시 재산 분할의 기준은 어떻게 되나요?"라는 질문에
+          대한 실제 응답입니다. 이 밖에도 "혼인신고는 했는데 사실상 별거
+          중입니다. 이혼이 인정될까요?", "협의이혼이랑 재판상이혼은 어떤
+          차이가 있나요?" 같은 질문에도 각각 조건별·항목별로 구조화된
+          답변을 생성하는 것을 확인했습니다.
+        </p>
+
+        <h2>작품 특징 및 기대효과</h2>
+        <p>
+          한국어 법률 데이터만 학습해 국내 환경에 최적화된 상담 경험을
+          제공하는 것이 특징이며, 단순 답변뿐 아니라 유사 사건·판례를
+          제시하는 것을 차별점으로 설계했습니다. LoRA와 Unsloth 덕분에 저비용
+          환경에서도 대규모 모델 학습이 가능했고, Gradio 기반 UI로 접근성을
+          높였습니다.
+        </p>
+        <ul class="list">
+          <li>시간·장소 제약 없이 법률 상담을 받을 수 있어 법률 서비스 접근성을 높임</li>
+          <li>변호사 상담 대비 비용과 대기 시간을 줄여 신속한 상담 환경 제공</li>
+          <li>반복적이고 기본적인 상담을 AI가 처리해 변호사가 중요 업무에 집중할 수 있도록 지원</li>
+        </ul>
+
+        <div class="limits">
+          <b>한계</b> — 8B 규모 모델과 5만여 건 데이터로는 상용 대형 챗봇
+          수준의 문장 완성도에는 못 미치며, 학습 직후에는 법률과 무관한
+          개념을 설명하는 등 응답이 왜곡되는 문제도 있었습니다. 학습
+          데이터가 민사·형사 위주라 행정·가사 등 다른 분야는 다루지 못하고,
+          결과는 참고용일 뿐 실제 법적 판단이나 소송 대리를 대체하지 않습니다.
+        </div>
+
+        <div class="callout">
+          <b>향후 계획 (보고서에서 밝힌 내용)</b> — ChatGPT 같은 상용 AI처럼
+          더 자연스럽게 대화를 이어가고 깔끔한 답변을 낼 수 있도록 모델 학습을
+          최적화하고, 다양한 법률 분야로 데이터와 기능을 확장하는 것을 다음
+          단계로 계획했습니다.
+        </div>
+
+        <h2>느낀 점</h2>
+        <p>
+          학습만으로는 배포 가능한 품질이 나오지 않는다는 것을 이번
+          프로젝트에서 체감했습니다. 학습 직후 모델은 지시문 형식 태그가
+          답변에 그대로 노출되거나 문장이 중간에 끊기는 문제가 있었고,
+          에폭을 1·2·3회로 바꿔가며 비교했을 때도 2회가 가장 안정적이었을
+          뿐 완벽하지는 않았습니다. 결국 유사 문장 제거·불완전 문장 절단
+          같은 후처리 로직을 별도로 만들고 나서야 실제로 보여줄 수 있는
+          답변 품질이 나왔고, 파인튜닝은 "모델을 만드는 작업"이 아니라
+          "데이터·학습·후처리를 함께 설계하는 작업"이라는 걸 배웠습니다.
+        </p>
+
+        <h2>문제 해결</h2>
+        <p>
+          원본 법률 QA 데이터셋에는 사건과 무관한 감정적 하소연이 섞여
+          있어, 이 상태로 학습하면 모델이 핵심 쟁점이 아닌 부차적인 내용에
+          끌려갈 위험이 있었습니다. 56,358건 전체를 사람이 손으로 정제하기엔
+          무리라 ChatGPT를 활용해 원문을 핵심 질문과 결론 위주의 지시문-응답
+          쌍으로 대량 요약·재생성하는 파이프라인을 만들었고, 이렇게 정제한
+          53,480건을 최종 학습에 사용했습니다. 데이터 품질이 곧 모델 품질을
+          좌우한다는 걸 재확인한 과정이었습니다.
+        </p>
+      </article>
+    </main>
+  </div>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

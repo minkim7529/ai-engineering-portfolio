@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>졸음방지 독서대 — 김민석 포트폴리오</title>
+<meta name="description" content="아두이노 + 서보모터 독서대에 Dlib·CNN 기반 졸음 감지를 결합한 임베디드 + AI 프로젝트" />
+<link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" />
+<link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <nav class="sitebar" id="sitebar">
+    <a href="../index.html" class="brand">김민석 / AI ENGINEER</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="테마 전환" title="라이트/다크 테마 전환">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+    </button>
+  </nav>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebarMount" data-base="../" data-active="drowsy-reading-stand"></aside>
+
+    <main class="main">
+      <a class="back-link" href="../index.html">← 홈으로</a>
+
+      <article class="project-page reveal">
+        <p class="project-kicker">PROJECT · drowsy-reading-stand</p>
+        <h1>졸음방지 독서대</h1>
+        <p class="project-lede">Dlib 얼굴 랜드마크 + CNN 눈 상태 분류로 졸음을 감지하는 아두이노 각도조절 독서대</p>
+        <div class="project-meta">
+          <a href="https://github.com/minkim7529/drowsy-reading-stand" class="btn primary" target="_blank" rel="noopener">GitHub 저장소 (발표자료) →</a>
+          <span class="badge">2인 팀 · 중간발표</span>
+        </div>
+
+        <ul class="tags">
+          <li>Arduino UNO R3</li>
+          <li>Dlib (얼굴 랜드마크)</li>
+          <li>CNN (PyTorch)</li>
+          <li>SG90 서보모터</li>
+          <li>DHT11 / LDR 센서</li>
+        </ul>
+
+        <div class="stats">
+          <div class="stat"><span class="n mono">99.65%</span><span class="l">검증 정확도 (눈 뜸/감음 이진 분류)</span></div>
+          <div class="stat"><span class="n mono">2,586</span><span class="l">장 훈련 / 288장 검증 (눈 영역 crop)</span></div>
+          <div class="stat"><span class="n mono">0.48</span><span class="l">판정 임계값 (사용자별 조정 가능)</span></div>
+          <div class="stat"><span class="n mono">880K</span><span class="l">파라미터 규모 CNN</span></div>
+        </div>
+
+        <h2>개요</h2>
+        <p>
+          2인 팀(김민석, 김영준) 수업 프로젝트로, 아두이노 UNO와 서보모터로
+          각도가 조절되는 독서대에 Dlib 얼굴 랜드마크로 검출한 눈 영역을
+          CNN으로 이진 분류(뜸/감음)해 졸음을 감지하는 임베디드 + AI 프로젝트입니다.
+          기존 수업용 확장쉴드 대신 브레드보드를 직접 설계해, 확장쉴드에 없는
+          기능을 자유롭게 추가할 수 있도록 만들었습니다.
+        </p>
+
+        <h2>진행 과정 — 하드웨어 구성</h2>
+        <table class="spectable">
+          <tr><th>Arduino UNO R3</th><td>센서/액추에이터 제어</td></tr>
+          <tr><th>SG90 서보모터</th><td>독서대 각도 제어</td></tr>
+          <tr><th>5mm Red LED + 220Ω</th><td>시각적 상태 표시</td></tr>
+          <tr><th>Tactile 푸시 버튼</th><td>ON/OFF 입력</td></tr>
+          <tr><th>DHT11 온습도 센서</th><td>환경 데이터 측정</td></tr>
+          <tr><th>Active 부저</th><td>경고음</td></tr>
+          <tr><th>LDR 조도 센서</th><td>주변 밝기 측정</td></tr>
+        </table>
+
+        <h2>주요 기능 — 졸음 감지 로직</h2>
+        <p>
+          눈 깜빡임 지속시간(약 0.3초, 3~4초 간격)과 눈 감김 빈도를 기준으로
+          삼았고, "5초 동안 눈이 감긴 상태이거나 깜빡임 빈도가 낮아지면
+          졸음으로 판단"하는 기준은 선행 연구(주영훈 외, "지능형 졸음 운전
+          경고 시스템", 한국지능시스템학회 논문지, 2008)의 fuzzy membership
+          함수를 참고했습니다.
+        </p>
+
+        <h2>AI 모델</h2>
+        <ul class="list">
+          <li><b>얼굴/눈 검출</b> — Dlib으로 눈, 코, 입, 눈썹, 얼굴 윤곽 랜드마크를 검출</li>
+          <li><b>분류 모델</b> — 눈 뜬 상태 vs 감은 상태 이진 분류. Conv → Activation → Pooling을 3번 반복 후 Linear 레이어 2개로 최종 출력 (Batch Normalization·Dropout은 미사용)</li>
+          <li><b>데이터셋</b> — 훈련 2,586개 / 검증 288개 (눈 영역 crop 이미지)</li>
+        </ul>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Layer</th><th>Output Shape</th><th>Param #</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">Conv2d-1</td><td class="mono">[-1, 32, 26, 34]</td><td class="mono">320</td></tr>
+              <tr><td class="mono">Conv2d-2</td><td class="mono">[-1, 64, 13, 17]</td><td class="mono">18,496</td></tr>
+              <tr><td class="mono">Conv2d-3</td><td class="mono">[-1, 128, 6, 8]</td><td class="mono">73,856</td></tr>
+              <tr><td class="mono">Linear-4</td><td class="mono">[-1, 512]</td><td class="mono">786,944</td></tr>
+              <tr><td class="mono">Linear-5</td><td class="mono">[-1, 1]</td><td class="mono">513</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="limits">
+          <b>결과 및 한계</b> — 검증 정확도 99.65%를 얻었지만, 발표 슬라이드에서도
+          스스로 분석했듯 이미지 크기가 작고 이진 분류라는 문제 특성상 정확도가
+          높게 나온 것으로 보고 있습니다. 또한 <b>마스크를 착용한 상태에서는
+          인식되지 않는다</b>는 한계를 명시했습니다.
+        </div>
+
+        <h2>향후 계획 (중간발표 시점 기준)</h2>
+        <ul class="list">
+          <li>눈 깜빡임 감지 모델을 아두이노에 연동</li>
+          <li>눈 깜빡임 출력 신호를 아두이노와 통신해 부저 울림 설계</li>
+          <li>온습도에 따라 LED 점등, 조도에 따라 LED 밝기 자동 조절</li>
+          <li>버튼으로 on/off 기능 구현</li>
+          <li>얼굴 거리/각도를 인식해 독서대 각도를 서보모터로 자동 조절</li>
+        </ul>
+
+        <h2>느낀 점</h2>
+        <p>
+          검증 정확도 99.65%라는 수치만 보면 완성도가 높아 보이지만, 눈
+          영역만 잘라낸 작은 이미지에 이진 분류라는 문제 자체가 상대적으로
+          쉬운 축에 속한다는 것도 함께 고려해야 한다는 걸 발표를 준비하며
+          스스로 짚었습니다. 마스크를 쓰면 눈 주변 랜드마크 검출이 아예 안
+          된다는 한계도 실제로 확인했는데, 높은 정확도 수치 하나만으로
+          모델의 실사용 가능성을 판단하면 안 된다는 걸 배운 프로젝트였습니다.
+        </p>
+
+        <h2>문제 해결</h2>
+        <p>
+          수업에서 제공하는 확장쉴드만으로는 필요한 센서(DHT11, LDR, 부저
+          등)를 원하는 대로 조합해 추가하기 어려웠습니다. 그래서 확장쉴드
+          대신 브레드보드를 직접 설계해 회로를 구성했고, 덕분에 정해진 부품
+          구성에 얽매이지 않고 온습도·조도 센서 같은 기능을 자유롭게 추가할
+          수 있었습니다.
+        </p>
+      </article>
+    </main>
+  </div>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

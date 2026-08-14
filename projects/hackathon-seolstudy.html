@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>설스터디 (해커톤) — 김민석 포트폴리오</title>
+<meta name="description" content="블레이버스 제4회 MVP 개발 해커톤 — 멘토·멘티 1:1 수능 학습 코칭 플랫폼, 프론트엔드 담당" />
+<link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" />
+<link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <nav class="sitebar" id="sitebar">
+    <a href="../index.html" class="brand">김민석 / AI ENGINEER</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="테마 전환" title="라이트/다크 테마 전환">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+    </button>
+  </nav>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebarMount" data-base="../" data-active="hackathon-seolstudy"></aside>
+
+    <main class="main">
+      <a class="back-link" href="../index.html">← 홈으로</a>
+
+      <article class="project-page reveal">
+        <p class="project-kicker">PROJECT · hackathon-seolstudy</p>
+        <h1>설스터디</h1>
+        <p class="project-lede">블레이버스 제4회 MVP 개발 해커톤 — 멘토와 함께하는 수능 국어·영어·수학 학습 코칭 플랫폼</p>
+        <div class="project-meta">
+          <a href="https://github.com/RublerubitZ/semicolon" class="btn primary" target="_blank" rel="noopener">GitHub 저장소 →</a>
+          <span class="badge">🏆 본선 진출 · 6인 팀 · 프론트엔드 담당</span>
+        </div>
+
+        <ul class="tags">
+          <li>Next.js 16 (App Router)</li>
+          <li>React 19 / TypeScript</li>
+          <li>TailwindCSS v4</li>
+          <li>TanStack Query v5</li>
+          <li>Zustand v5</li>
+          <li>Tiptap · Framer Motion</li>
+          <li>React Hook Form + Zod</li>
+        </ul>
+
+        <h2>개요</h2>
+        <p>
+          설스터디는 수능 국어·영어·수학 학습을 위한 1:1 멘토링 기반 학습
+          코칭 플랫폼입니다. 멘토가 직접 설계하는 맞춤형 학습 플랜, 일일
+          플래너·자기체크·공부 시간 추적으로 실행력을 높이고, 과목별 피드백과
+          주기별 보고서로 관리 품질을 표준화하는 것을 핵심 가치로 삼았습니다.
+          6인 팀("세미콜론": 이승민·공지호·구승율·김민석·김태희·조현빈)으로
+          블레이버스 제4회 MVP 개발 해커톤에 출품해 <b>본선에 진출</b>했으며,
+          본인 담당은 <b>프론트엔드</b>입니다.
+        </p>
+
+        <h2>진행 과정</h2>
+        <p>
+          수능을 준비하는 고등학생 페르소나의 학습 여정을 계획 → 공부 → 시험
+          → 결과 확인 → 오답 풀이 단계별로 매핑하고, 각 단계의 pain point에서
+          기능을 도출하는 방식으로 기획했습니다. 이후 멘티 화면(모바일 최적화)과
+          멘토 화면(PC 최적화)을 라우트 단위로 분리해 병렬로 개발했습니다.
+          프론트엔드는 <code class="inline">app/mentee</code>, <code class="inline">app/mentor</code> 두
+          디렉터리로 나누고, 공통 컴포넌트·Zustand 스토어·API 훅을 별도
+          레이어로 분리해 두 화면이 로직을 공유하도록 구성했습니다.
+        </p>
+
+        <h2>주요 기능</h2>
+        <ul class="list">
+          <li>
+            <b>멘티(학생)</b> — 일일/주간/월간 플래너(오늘의 할 일·자기체크·주간
+            통계·월간 캘린더), 과목별 공부 시간 타이머, 과제 제출(이미지 업로드),
+            일일·주간·월간 피드백 열람, 학습 보고서 및 추이 분석, 스트릭·히트맵
+            기반 학습 패턴 시각화, 멘티 간 달성률 랭킹, 학습 리마인더 알림
+          </li>
+          <li>
+            <b>멘토(선생님)</b> — 담당 멘티 목록 및 대시보드, 멘티별 플래너·스트릭·
+            히트맵·통계 조회, 학생별 맞춤 과제 생성/수정/승인, 제출물 코멘트,
+            칼럼·PDF 학습지 업로드, 과목별 상세 피드백 작성, 멘티별 보고서 열람
+          </li>
+        </ul>
+
+        <h2>담당 구현 — 프론트엔드</h2>
+        <p>
+          Next.js 16 App Router와 React 19, TypeScript로 멘티/멘토 화면을
+          구현했습니다. 서버 상태(플래너, 피드백, 보고서 등 API 데이터)는
+          TanStack Query로 캐싱·재검증하고, 클라이언트 상태(UI 토글, 폼 임시
+          입력값 등)는 Zustand로 분리해서 관리했습니다. 학습지·피드백처럼
+          서식이 필요한 입력에는 Tiptap 리치 텍스트 에디터를 붙였고, 폼
+          검증은 React Hook Form + Zod 스키마로 처리했습니다. TailwindCSS v4로
+          모바일(멘티)·PC(멘토) 두 레이아웃을 반응형으로 스타일링하고,
+          Framer Motion으로 플래너 전환·랭킹 갱신 같은 인터랙션에 애니메이션을
+          더했습니다.
+        </p>
+
+        <h2>핵심 코드 (팀 저장소 기준)</h2>
+        <p>
+          팀 저장소 프론트엔드에서 발췌한 코드입니다.
+        </p>
+        <div class="codeblock">
+          <span class="label">lib/api.ts — 로컬/프로덕션 API 엔드포인트 자동 판별</span>
+          <pre><code>// 로컬 개발 환경에서는 로컬 백엔드를 확인하고, 프로덕션에서는 Railway 사용
+const PRODUCTION_API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://semicolon-production.up.railway.app';
+const LOCAL_API_PORT = process.env.NEXT_PUBLIC_LOCAL_API_PORT || '4000';
+
+function isProduction(): boolean {
+  if (typeof window === 'undefined') return false;
+  const hostname = window.location.hostname;
+  return hostname !== 'localhost' && hostname !== '127.0.0.1' && !hostname.startsWith('192.168.');
+}
+
+function getLocalUrl(): string {
+  if (typeof window === 'undefined') return `http://localhost:${LOCAL_API_PORT}`;
+  const hostname = window.location.hostname;
+  return `http://${hostname}:${LOCAL_API_PORT}`;
+}
+
+async function checkLocalBackend(): Promise&lt;boolean&gt; {
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() =&gt; controller.abort(), 1000);
+    const response = await fetch(`${getLocalUrl()}/api/health`, {
+      method: 'GET',
+      signal: controller.signal,
+    });
+    clearTimeout(timeoutId);
+    return response.ok;
+  } catch (error) {
+    return false;
+  }
+}</code></pre>
+        </div>
+        <div class="codeblock">
+          <span class="label">stores/useOverlayStore.ts — 다중 오버레이 상태 관리 (Zustand)</span>
+          <pre><code>import { create } from 'zustand';
+
+interface OverlayStore {
+  openOverlays: string[];
+  setOverlay: (id: string, isOpen: boolean) =&gt; void;
+  isOverlayOpen: boolean;
+}
+
+export const useOverlayStore = create&lt;OverlayStore&gt;((set) =&gt; ({
+  openOverlays: [],
+  isOverlayOpen: false,
+  setOverlay: (id, isOpen) =&gt; set((state) =&gt; {
+    const nextOverlays = isOpen
+      ? Array.from(new Set([...state.openOverlays, id]))
+      : state.openOverlays.filter(o =&gt; o !== id);
+    return {
+      openOverlays: nextOverlays,
+      isOverlayOpen: nextOverlays.length &gt; 0
+    };
+  }),
+}));</code></pre>
+        </div>
+
+        <h2>API 개요</h2>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Method</th><th>Endpoint</th><th>설명</th></tr></thead>
+            <tbody>
+              <tr><td>GET</td><td class="mono">/api/auth/me</td><td>현재 사용자 (쿠키 기반)</td></tr>
+              <tr><td>GET</td><td class="mono">/api/mentee/planner/daily</td><td>멘티 일일 플래너</td></tr>
+              <tr><td>POST</td><td class="mono">/api/mentee/tasks/:id/submit</td><td>과제 제출</td></tr>
+              <tr><td>GET</td><td class="mono">/api/mentee/streak</td><td>학습 스트릭 정보</td></tr>
+              <tr><td>GET</td><td class="mono">/api/mentee/heatmap</td><td>학습 패턴 히트맵</td></tr>
+              <tr><td>GET</td><td class="mono">/api/mentor/mentees</td><td>담당 멘티 목록</td></tr>
+              <tr><td>PATCH</td><td class="mono">/api/mentor/tasks/:id/approve</td><td>과제 제출 승인</td></tr>
+              <tr><td>POST</td><td class="mono">/api/mentor/worksheets</td><td>학습지 생성</td></tr>
+              <tr><td>GET</td><td class="mono">/api/reports/trends</td><td>학습 추이 보고서</td></tr>
+              <tr><td>POST</td><td class="mono">/api/upload/images</td><td>이미지 업로드 (다건)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>기술 스택 (팀 전체)</h2>
+        <table class="spectable">
+          <tr><th>Frontend</th><td>Next.js 16 (App Router), React 19, TypeScript, TailwindCSS v4, TanStack Query v5, Zustand v5, Tiptap, Framer Motion, React Hook Form + Zod</td></tr>
+          <tr><th>Backend</th><td>Node.js + Express.js, TypeScript, Prisma ORM v6, PostgreSQL, JWT(Access + Refresh Token), node-cron, Winston</td></tr>
+          <tr><th>Infra</th><td>Vercel(Frontend) · Railway(Backend) · Neon(PostgreSQL) · Cloudinary(이미지/PDF)</td></tr>
+        </table>
+
+        <div class="callout">
+          <b>팀 구성</b> — PM 이승민 · 프론트엔드 김민석 · 백엔드 구승율/조현빈 ·
+          UI/UX 공지호/김태희. 전체 소스코드는
+          <a href="https://github.com/RublerubitZ/semicolon" target="_blank" rel="noopener">github.com/RublerubitZ/semicolon</a>에서,
+          배포된 서비스는
+          <a href="https://semicolon-phi.vercel.app" target="_blank" rel="noopener">semicolon-phi.vercel.app</a>에서
+          확인할 수 있습니다.
+        </div>
+
+        <h2>느낀 점</h2>
+        <p>
+          해커톤이라는 제한된 시간 안에서 멘티(모바일)·멘토(PC) 두 화면을
+          동시에 완성해야 했기 때문에, 처음부터 공통 컴포넌트·Zustand
+          스토어·API 훅을 별도 레이어로 분리해 두 화면이 로직을 공유하도록
+          설계했습니다. 서버 상태와 클라이언트 상태를 TanStack Query·
+          Zustand로 명확히 나눠 관리한 덕분에, 짧은 개발 기간에도 상태
+          관리가 꼬이는 일 없이 본선까지 안정적으로 기능을 확장할 수
+          있었습니다.
+        </p>
+
+        <h2>문제 해결</h2>
+        <p>
+          팀원들이 각자 로컬 백엔드를 켜둔 상태와 배포된 프로덕션 백엔드를
+          오가며 개발하다 보니, API 주소를 수동으로 바꿔가며 테스트하는 게
+          번거롭고 실수하기 쉬운 지점이었습니다. hostname으로 로컬/배포
+          환경을 자동 판별하고, 로컬 백엔드가 실행 중인지 헬스체크로 확인한
+          뒤 없으면 프로덕션(Railway)으로 자동 전환하는 유틸(<code class="inline">lib/api.ts</code>)을
+          만들어 팀원 전체가 같은 코드로 어떤 환경에서든 바로 개발을 이어갈
+          수 있게 했습니다.
+        </p>
+      </article>
+    </main>
+  </div>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

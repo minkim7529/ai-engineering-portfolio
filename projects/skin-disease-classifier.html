@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>피부질환 분류 알고리즘 — 김민석 포트폴리오</title>
+<meta name="description" content="ResNet 스타일 skip-connection CNN을 처음부터 설계해 4종 피부 상태를 분류한 프로젝트" />
+<link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" />
+<link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <nav class="sitebar" id="sitebar">
+    <a href="../index.html" class="brand">김민석 / AI ENGINEER</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="테마 전환" title="라이트/다크 테마 전환">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+    </button>
+  </nav>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebarMount" data-base="../" data-active="skin-disease-classifier"></aside>
+
+    <main class="main">
+      <a class="back-link" href="../index.html">← 홈으로</a>
+
+      <article class="project-page reveal">
+        <p class="project-kicker">PROJECT · skin-disease-classifier</p>
+        <h1>피부질환 분류 알고리즘</h1>
+        <p class="project-lede">여드름·습진·피부암·정상 피부 4종을 분류하는 ResNet 스타일 CNN을 처음부터 설계</p>
+        <div class="project-meta">
+          <a href="https://github.com/minkim7529/skin-disease-classifier" class="btn primary" target="_blank" rel="noopener">GitHub 저장소 →</a>
+          <span class="badge">3인 팀 · 수업 프로젝트</span>
+        </div>
+
+        <ul class="tags">
+          <li>Python / PyTorch</li>
+          <li>CNN (skip-connection)</li>
+          <li>Custom Dataset</li>
+          <li>Data Augmentation</li>
+        </ul>
+
+        <h2>개요</h2>
+        <p>
+          여드름·습진·피부암·정상 피부 4종을 분류하는 CNN을 처음부터 설계한
+          3인 팀(구승율, 김민석, 김영준) 수업 프로젝트입니다. 본인 담당은
+          <b>데이터 정제, 모델 학습 및 실행</b>입니다. ResNet 스타일의
+          skip-connection 블록(<code class="inline">Convbox</code>)을 4개 층으로 쌓고, 배치
+          사이즈(32/64/128)·에폭(5 단위)·드롭아웃 조합을 직접 스윕하며 과적합
+          구간과 최적점을 실측으로 찾았습니다.
+        </p>
+
+        <h2>진행 과정 — 데이터</h2>
+        <p>
+          Kaggle 데이터셋에서 여드름/습진/피부암/정상 피부 4종을 클래스당
+          약 2,000장씩 수집하고, 클래스당 이미지 수를 약 2,500개로 통일해
+          train:test = 8:2로 정제했습니다.
+        </p>
+
+        <h2>모델 구조</h2>
+        <div class="table-wrap">
+          <table class="data">
+            <tbody>
+              <tr><td class="mono">Input</td><td>3×224×224</td></tr>
+              <tr><td class="mono">Stem</td><td>Conv7x7(64) + BN + ReLU + MaxPool</td></tr>
+              <tr><td class="mono">Layer1</td><td>Convbox(64→64) × 3</td></tr>
+              <tr><td class="mono">Layer2</td><td>Convbox(64→128, stride2) × 4 (+dropout)</td></tr>
+              <tr><td class="mono">Layer3</td><td>Convbox(128→256, stride2) × 6 (+dropout)</td></tr>
+              <tr><td class="mono">Layer4</td><td>Convbox(256→512, stride2) × 3 (+dropout)</td></tr>
+              <tr><td class="mono">Head</td><td>AdaptiveAvgPool(1×1) → FC(512 → num_classes)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          <code class="inline">Convbox</code>는 3×3 컨볼루션 두 개를 쌓고, 입력을 그대로
+          (또는 1×1 컨볼루션으로 차원을 맞춰) 더해주는 residual/skip-connection
+          블록입니다. 네트워크가 깊어질 때 발생하는 그래디언트 소실을 완화하기
+          위해 넣었습니다.
+        </p>
+
+        <h2>주요 기능 / 코드 구성</h2>
+        <table class="spectable">
+          <tr><th>dataset.py</th><td><code class="inline">CustomImageDataset</code> — 클래스별 디렉터리를 순회해 이미지 경로와 레이블을 수집하는 커스텀 Dataset</td></tr>
+          <tr><th>model.py</th><td><code class="inline">Convbox</code>(skip-connection 블록) + <code class="inline">CustomSkinClassification</code>(4단 레이어 CNN)</td></tr>
+          <tr><th>train.py</th><td>전처리(Resize/RandomCrop/Normalize) + 학습/검증 루프 + 정확도 그래프</td></tr>
+        </table>
+
+        <h2>핵심 코드</h2>
+        <div class="codeblock">
+          <span class="label">model.py — Convbox(skip-connection 블록)</span>
+          <pre><code>class Convbox(nn.Module):
+    def __init__(self, in_channels, out_channels, stride=1, dropout_rate=None):
+        super(Convbox, self).__init__()
+        self.conv1 = nn.Conv2d(in_channels, out_channels, kernel_size=3, stride=stride, padding=1, bias=False)
+        self.bn1 = nn.BatchNorm2d(out_channels)
+        self.relu = nn.ReLU(inplace=True)
+        self.conv2 = nn.Conv2d(out_channels, out_channels, kernel_size=3, stride=stride, padding=1, bias=False)
+        self.bn2 = nn.BatchNorm2d(out_channels)
+
+        # 네트워크의 깊이를 늘릴 때 발생하는 그래디언트 소실 문제를 완화(앞선의 입력을 더해줌으로써)
+        self.storage = nn.Sequential()
+        if stride != 1 or in_channels != out_channels:
+            self.storage = nn.Sequential(
+                nn.Conv2d(in_channels, out_channels, kernel_size=1, stride=stride, bias=False),
+                nn.BatchNorm2d(out_channels)
+            )
+
+    def forward(self, x):
+        storage = self.storage(x)  # 스킵 연결 부분을 먼저 계산
+        out = self.conv1(x); out = self.bn1(out); out = self.relu(out)
+        out = self.conv2(out); out = self.bn2(out)
+        if storage.size(2) != out.size(2) or storage.size(3) != out.size(3):
+            storage = F.interpolate(storage, size=(out.size(2), out.size(3)), mode='nearest')
+        out += storage  # 스킵 연결을 더함
+        out = self.relu(out)
+        return out</code></pre>
+        </div>
+        <div class="codeblock">
+          <span class="label">dataset.py — CustomImageDataset</span>
+          <pre><code>class CustomImageDataset(Dataset):
+    def __init__(self, data_set_path, transforms=None):
+        self.data_set_path = data_set_path
+        self.image_files_path, self.labels, self.length, self.num_classes = self.read_data_set()
+        self.transforms = transforms
+
+    def read_data_set(self):
+        all_img_files = []
+        all_labels = []
+        class_names = os.walk(self.data_set_path).__next__()[1]
+
+        for index, class_name in enumerate(class_names):
+            label = index
+            img_dir = os.path.join(self.data_set_path, class_name)
+            img_files = os.walk(img_dir).__next__()[2]
+            for img_file in img_files:
+                img_file = os.path.join(img_dir, img_file)
+                img = Image.open(img_file)
+                if img is not None:
+                    all_img_files.append(img_file)
+                    all_labels.append(label)
+
+        return all_img_files, all_labels, len(all_img_files), len(class_names)
+
+    def __getitem__(self, index):
+        image = Image.open(self.image_files_path[index]).convert("RGB")
+        if self.transforms is not None:
+            image = self.transforms(image)
+        return {'image': image, 'label': self.labels[index]}</code></pre>
+        </div>
+        <div class="codeblock">
+          <span class="label">train.py — 전처리 및 학습 루프</span>
+          <pre><code>hyper_param_epoch = 20
+hyper_param_batch = 64
+hyper_param_learning_rate = 0.001
+
+transform_train = transforms.Compose([
+    transforms.Resize((256, 256)),
+    transforms.RandomCrop(224),
+    transforms.ToTensor(),
+    transforms.Normalize(resize_train_mean, resize_train_std)
+])
+
+train_loader = DataLoader(train_data_set, batch_size=hyper_param_batch, shuffle=True)
+optimizer = torch.optim.Adam(custom_model.parameters(), lr=hyper_param_learning_rate)
+
+for e in range(hyper_param_epoch):
+    custom_model.train()
+    for i_batch, item in enumerate(train_loader):
+        images = item['image'].to(device)
+        labels = item['label'].to(device)
+
+        outputs = custom_model(images)
+        loss = criterion(outputs, labels)
+
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+    # ... 배치/에폭마다 훈련·테스트 정확도를 기록해 accuracy 그래프로 시각화</code></pre>
+        </div>
+
+        <h2>실험 — 과적합을 어떻게 잡았나</h2>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>실험</th><th>결과</th></tr></thead>
+            <tbody>
+              <tr><td>에포크 5 단위 증가</td><td>20 미만은 학습 부족, 30 이상은 20과 정확도는 비슷한데 학습 시간만 늘고 과대적합 발생 → <b>20으로 결정</b></td></tr>
+              <tr><td>배치 사이즈 32 / 64 / 128</td><td>64에서 최적, 128 이상은 메모리 부족 에러 발생 → <b>64로 결정</b></td></tr>
+              <tr><td>Batch Normalize</td><td>훈련/테스트 배치 정규화로 데이터 분포를 통일해 과적합 방지</td></tr>
+              <tr><td>데이터 정제</td><td>클래스당 이미지 수를 약 2,500개로 통일, train:test = 8:2로 조정</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>결과물 — 예측 예제</h2>
+        <figure class="shot">
+          <img src="../img/skin-disease-predictions.png" alt="피부 상태 분류 예측 결과 — 16장의 테스트 이미지에 대한 실제/예측 라벨 비교, 오른쪽은 피부암으로 예측된 이미지 확대" loading="lazy" />
+          <figcaption>테스트 이미지 16장에 대한 실제 라벨 vs 예측 라벨 비교(Success/Failure 표시) — 발표자료 슬라이드</figcaption>
+        </figure>
+
+        <div class="limits">
+          <b>결과 및 한계</b> — 검증 정확도는 약 99% 이상으로 매우 높게 나왔는데,
+          발표 슬라이드에서도 스스로 분석했듯 "이미지 사이즈가 작고 이진 분류가
+          아닌 4-class이지만 클래스 간 시각적 차이가 뚜렷해 정확도가 높게 나온
+          것"으로 보고 있습니다. 상용 피부과 진단 도구를 대체하려는 목적이
+          아닌 학습용 분류기입니다.
+        </div>
+
+        <div class="callout">
+          <b>팀</b> — 구승율(데이터 수집·전처리) · 김민석(데이터 정제, 모델 학습 및 실행) · 김영준(데이터셋, 모델 설계)
+        </div>
+
+        <h2>느낀 점</h2>
+        <p>
+          배치 사이즈·에폭·드롭아웃을 직접 스윕하면서, 파라미터를 하나 바꿀
+          때마다 정확도가 어떻게 움직이는지 실측으로 확인하는 과정이 감으로
+          설계할 때보다 훨씬 신뢰할 수 있는 결정을 하게 해준다는 걸
+          배웠습니다. 동시에 검증 정확도가 99%대로 높게 나온 것을 보고 바로
+          만족하지 않고, 클래스 간 시각적 차이가 뚜렷해서 나온 결과일 수
+          있다는 점까지 스스로 짚어본 것도 이번 프로젝트에서 얻은
+          습관입니다.
+        </p>
+
+        <h2>문제 해결</h2>
+        <p>
+          에폭을 늘릴수록 성능이 계속 좋아질 거라 예상했지만, 30 에폭
+          이상에서는 20 에폭과 정확도는 비슷한데 학습 시간만 늘고 과대적합
+          징후가 나타났습니다. 배치 사이즈도 128에서는 메모리 부족 에러가
+          났습니다. 감으로 정하는 대신 배치 사이즈(32/64/128)·에폭(5 단위)을
+          직접 스윕하며 비교한 끝에 배치 64·에폭 20을 최적점으로 확정했고,
+          Batch Normalization까지 더해 과적합을 통제했습니다.
+        </p>
+      </article>
+    </main>
+  </div>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

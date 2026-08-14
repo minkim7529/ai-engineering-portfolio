@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Goods Shop 웹 프로젝트 — 김민석 포트폴리오</title>
+<meta name="description" content="대구대학교 웹 프로그래밍 수업 과제 — Java MVC로 혼자 설계·구현한 카카오톡 이모티콘 굿즈 쇼핑몰" />
+<link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" />
+<link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <nav class="sitebar" id="sitebar">
+    <a href="../index.html" class="brand">김민석 / AI ENGINEER</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="테마 전환" title="라이트/다크 테마 전환">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+    </button>
+  </nav>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebarMount" data-base="../" data-active="goods-shop"></aside>
+
+    <main class="main">
+      <a class="back-link" href="../index.html">← 홈으로</a>
+
+      <article class="project-page reveal">
+        <p class="project-kicker">PROJECT · goods-shop</p>
+        <h1>Goods Shop 웹 프로젝트</h1>
+        <p class="project-lede">카카오톡 이모티콘 캐릭터 굿즈를 온라인으로 판매하는 Java 웹 쇼핑몰</p>
+        <div class="project-meta">
+          <a href="https://github.com/minkim7529/goods-shop" class="btn primary" target="_blank" rel="noopener">GitHub 저장소 (발표자료) →</a>
+          <span class="badge">개인 개발 · 수업 과제</span>
+        </div>
+
+        <ul class="tags">
+          <li>Java</li>
+          <li>MVC 패턴</li>
+          <li>Database 연동</li>
+          <li>약 1개월 (2024.8.1~8.30)</li>
+        </ul>
+
+        <h2>개요</h2>
+        <p>
+          대구대학교 AI학과 "웹 프로그래밍" 수업 과제로, 약 한 달간 혼자
+          기획·설계·구현한 Java 웹 쇼핑몰입니다. 좋아하는 카카오톡 이모티콘
+          관련 굿즈가 오프라인으로만 판매되는 것을 보고, 온라인 판매 사이트를
+          직접 만들어보자는 아이디어에서 시작했습니다.
+        </p>
+
+        <figure class="shot">
+          <img src="../img/goods-shop-list.jpg" alt="Goods Shop 굿즈 리스트 화면" loading="lazy" />
+          <figcaption>굿즈 리스트 화면</figcaption>
+        </figure>
+
+        <h2>진행 과정</h2>
+        <p>
+          주제 선정(8/1) → 개발 환경 구축(8/5) → 메인/회원가입(8/8~8/9) →
+          로그인·게시판(8/12~8/16) → 챗봇·굿즈 리스트(8/19~8/23) → PPT 및 기능
+          점검(8/26~8/29) → 발표(8/30) 순서로 약 한 달간 진행했습니다.
+        </p>
+
+        <h2>주요 기능</h2>
+        <ul class="list">
+          <li>회원가입/로그인 — 데이터베이스 연동, 중복 가입 방지</li>
+          <li>굿즈 리스트 / 홈페이지</li>
+          <li>장바구니 — 수량 조절, 합계 자동 계산</li>
+          <li>게시판 — 글 작성/조회/삭제, 페이지네이션</li>
+          <li>리뷰 작성 — 닉네임/내용/이미지 업로드</li>
+          <li>챗봇 프로토타입 — 버튼 기반 FAQ + 1:1 상담 연결(규칙 기반)</li>
+        </ul>
+
+        <h2>설계 — MVC 구조</h2>
+        <p>
+          REVIEW · USER · CART_ITEM · LIST(굿즈) 4개 테이블로 ERD를 설계하고,
+          <code class="inline">HomeController</code>가 <code class="inline">ReviewService</code>·<code class="inline">CartService</code>를
+          통해 홈/굿즈/장바구니/리뷰/챗봇 페이지를 처리하는 MVC 구조로
+          만들었습니다. 인증은 <code class="inline">UserController</code> + <code class="inline">UserService</code> +
+          <code class="inline">UserRepository</code>로 별도 분리해 책임을 나눴습니다.
+        </p>
+
+        <h2>느낀 점</h2>
+        <p>
+          회원가입부터 장바구니, 게시판, 챗봇 프로토타입까지 사이트 전체를
+          혼자 설계하고 구현하면서, 화면 하나를 완성하는 것보다 REVIEW·USER·
+          CART_ITEM·LIST 테이블 구조와 컨트롤러-서비스 책임 분리처럼 전체
+          구조를 먼저 잡는 게 이후 작업 속도를 크게 좌우한다는 걸
+          체감했습니다. 인증 로직을 <code class="inline">UserController</code>/
+          <code class="inline">UserService</code>/<code class="inline">UserRepository</code>로
+          별도 분리해둔 덕분에, 장바구니나 리뷰 기능을 추가할 때 로그인
+          관련 코드를 거의 다시 들여다볼 필요가 없었습니다.
+        </p>
+
+        <h2>문제 해결</h2>
+        <p>
+          한 달이라는 일정 안에서 챗봇까지 넣기로 하면서, LLM 연동 같은
+          복잡한 방식은 시간상 무리라고 판단했습니다. 대신 자주 나올 법한
+          질문을 버튼 기반 FAQ로 먼저 걸러내고, 해결되지 않는 경우만 1:1
+          상담으로 연결되는 규칙 기반 구조로 범위를 좁혀 정해진 일정 안에
+          실제로 동작하는 기능으로 완성했습니다.
+        </p>
+      </article>
+    </main>
+  </div>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
