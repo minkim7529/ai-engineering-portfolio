@@ -24,6 +24,7 @@ const NAV_GROUPS = [
   {
     label: "PROJECTS",
     items: [
+      { slug: "knowledge-assistant", title: "멀티모달 지식 어시스턴트 (RAG)", repo: "knowledge-assistant" },
       { slug: "vtuber-companion", title: "로컬 LLM 보이스 컴패니언", repo: "vtuber-ollama-gemini-experiments" },
       { slug: "legal-consultation-ai", title: "법률상담 AI", repo: "legal-consultation-ai", award: true },
       { slug: "hackathon-seolstudy", title: "설스터디 (해커톤)", repo: "hackathon-seolstudy", award: true },

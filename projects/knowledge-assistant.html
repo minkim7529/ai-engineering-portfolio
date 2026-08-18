@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>멀티모달 지식 어시스턴트 (RAG) — 김민석 포트폴리오</title>
+<meta name="description" content="Claude Code 바이브코딩으로 설계부터 RAG 구현, 실제 웹 배포까지 진행한 멀티모달 지식 어시스턴트 프로젝트" />
+<link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" />
+<link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <nav class="sitebar" id="sitebar">
+    <a href="../index.html" class="brand">김민석 / AI ENGINEER</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="테마 전환" title="라이트/다크 테마 전환">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+    </button>
+  </nav>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebarMount" data-base="../" data-active="knowledge-assistant"></aside>
+
+    <main class="main">
+      <a class="back-link" href="../index.html">← 홈으로</a>
+
+      <article class="project-page reveal">
+        <p class="project-kicker">PROJECT · knowledge-assistant</p>
+        <h1>멀티모달 지식 어시스턴트 (RAG)</h1>
+        <p class="project-lede">Claude Code와의 바이브코딩으로 기획·설계부터 RAG 구현, 실제 웹 배포·트러블슈팅까지 전 과정을 진행한 개인 프로젝트</p>
+        <div class="project-meta">
+          <a href="https://github.com/minkim7529/knowledge-assistant" class="btn primary" target="_blank" rel="noopener">GitHub 저장소 →</a>
+          <a href="https://frontend-two-zeta-32.vercel.app" class="btn secondary" target="_blank" rel="noopener">라이브 데모 →</a>
+          <span class="badge">개인 개발 · Claude Code 바이브코딩</span>
+        </div>
+
+        <ul class="tags">
+          <li>FastAPI</li>
+          <li>Next.js 15 / TypeScript</li>
+          <li>Supabase (Postgres + pgvector)</li>
+          <li>Gemini API</li>
+          <li>Vercel · Render 배포</li>
+        </ul>
+
+        <div class="stats">
+          <div class="stat"><span class="n mono">RAG</span><span class="l">문서·이미지를 하나의 벡터 공간에서 함께 검색</span></div>
+          <div class="stat"><span class="n mono">8 / 8</span><span class="l">검색 정확도 평가셋 Hit@5 (MRR 0.94)</span></div>
+          <div class="stat"><span class="n mono">Vercel + Render</span><span class="l">실제 배포 후 접근 코드로 보호한 라이브 데모</span></div>
+          <div class="stat"><span class="n mono">Claude Code</span><span class="l">설계 · 구현 · 배포 · 디버깅 전 과정을 바이브코딩으로 진행</span></div>
+        </div>
+
+        <img src="../img/knowledge-assistant-ui.png" alt="멀티모달 지식 어시스턴트 UI" style="width:100%;border-radius:var(--radius);border:1px solid var(--line);margin:28px 0;" loading="lazy" />
+
+        <h2>개요</h2>
+        <p>
+          기존에 만든 프로젝트들(법률상담 AI, 피부질환 분류기 등)을 되짚어보다가 한 가지 공백을 발견했습니다 —
+          RAG(검색 증강 생성)를 이론으로는 정리해뒀지만 실제로 코드로 구현해본 적이 한 번도 없었습니다.
+          이 프로젝트는 그 공백을 메우기 위해, <b>Claude Code를 바이브코딩 파트너로 삼아</b> 기획 단계부터
+          하이브리드 검색, 재순위화, 인용 기반 답변 생성까지 실제로 동작하는 RAG 파이프라인을 만들고,
+          로컬 데모에 그치지 않고 Vercel·Render에 실제로 배포해 지금도 접속 가능한 서비스로 완성한 결과물입니다.
+        </p>
+
+        <h2>진행 과정 — Claude Code와의 바이브코딩</h2>
+        <ul class="list">
+          <li>
+            <b>과거 프로젝트 분석 → 방향 설정</b> — 바탕화면의 기존 프로젝트 10여 개를 Claude Code가
+            직접 훑어보고, 파인튜닝·비전·풀스택 경험은 풍부하지만 RAG를 실제로 구현한 적이 없다는
+            공백을 짚어줬습니다. 이 분석을 바탕으로 "문서+이미지를 하나의 검색 공간에서 다루는
+            멀티모달 지식 어시스턴트"로 방향을 잡았습니다.
+          </li>
+          <li>
+            <b>플랜 모드로 아키텍처 합의 후 구현</b> — 코드를 바로 짜지 않고 먼저 아키텍처(청킹 → 임베딩 →
+            하이브리드 검색 → 재순위화 → 인용 기반 생성)를 문서로 정리해 검토한 뒤, 스캐폴딩부터
+            문서/이미지 파이프라인, 검색, 답변 생성, 프론트엔드 채팅 UI까지 단계별로 나눠 구현했습니다.
+          </li>
+          <li>
+            <b>실제 API로 라이브 검증</b> — Gemini API 키와 Supabase 프로젝트를 연결한 뒤, 실제 문서·이미지를
+            업로드해 질문-답변까지 전체 흐름을 직접 돌려보며 코드만으로는 드러나지 않는 문제들
+            (모델명 변경, 임베딩 차원, 프론트엔드 레이아웃 버그)을 그 자리에서 고쳤습니다.
+          </li>
+          <li>
+            <b>Vercel·Render 실배포와 트러블슈팅</b> — 로컬에서 잘 되던 것과 실제 배포 환경은 또 다른
+            문제였습니다. 아래 표에 정리한 배포 이슈들을 하나씩 겪고 고치며 지금 접속 가능한 데모까지
+            완성했습니다.
+          </li>
+          <li>
+            <b>레퍼런스 기반 UI 리디자인</b> — 배포 후 "UI가 별로다"는 피드백을 받고, 직접 디자인을 창작하는 대신
+            T3.chat 같은 실제 서비스의 디자인 언어(둥근 필 버튼, 단색 강조색, 넉넉한 여백)를 참고해
+            바이올렛 톤의 심플하고 컬러감 있는 UI로 다시 짰습니다.
+          </li>
+        </ul>
+
+        <h2>RAG 파이프라인 — 실제로 어떻게 동작하는가</h2>
+        <p>
+          이 프로젝트의 핵심은 "LLM에 검색 기능이 내장된 것"이 아니라, <b>LLM을 호출하기 전에 직접
+          만든 검색 단계가 프롬프트에 근거를 끼워 넣는 것</b>입니다. Gemini는 최종적으로 하나의 긴
+          텍스트 프롬프트만 받을 뿐, 그 안의 문맥이 벡터 검색으로 찾아온 것인지 전혀 구분하지 못합니다.
+        </p>
+        <ul class="list">
+          <li>
+            <b>하이브리드 검색</b> — 질문을 임베딩해 Supabase pgvector로 의미 검색을 하는 동시에,
+            Postgres 풀텍스트 검색으로 키워드 검색도 함께 돌립니다.
+          </li>
+          <li>
+            <b>RRF 병합 + LLM 재순위화</b> — 두 검색 결과를 Reciprocal Rank Fusion으로 합친 뒤, Gemini에게
+            후보 목록을 다시 보여주고 관련도 순으로 골라달라고 요청합니다.
+          </li>
+          <li>
+            <b>이미지 → 텍스트 브릿지</b> — 업로드된 이미지는 Gemini Vision이 상세 캡션을 생성하고,
+            그 캡션을 문서 청크와 <b>동일한 벡터 공간</b>에 저장합니다. 그 결과 텍스트 질문으로 이미지 안의
+            내용까지 검색되고 인용됩니다.
+          </li>
+        </ul>
+        <div class="codeblock">
+          <span class="label">gemini.py — 검색된 근거를 프롬프트에 직접 끼워 넣는 부분 (이게 곧 "R+A"에 해당)</span>
+          <pre><code>def stream_answer(self, question: str, context_blocks: list[str]) -> Iterator[str]:
+    context = "\n\n".join(
+        f"[{i + 1}] {block}" for i, block in enumerate(context_blocks)
+    )
+    prompt = f"{ANSWER_SYSTEM_PROMPT}\n\n--- 근거 ---\n{context}\n\n--- 질문 ---\n{question}"
+    response = self._client.models.generate_content(
+        model=self._model,
+        contents=prompt,
+    )</code></pre>
+        </div>
+        <p>
+          <code class="inline">context_blocks</code>는 Gemini API가 알려준 게 아니라, 우리 Supabase
+          벡터DB에서 직접 검색해 온 값입니다. 이 단계가 없었다면 Gemini는 사용자가 업로드한 문서나
+          이미지의 존재 자체를 몰랐을 것입니다.
+        </p>
+
+        <img src="../img/knowledge-assistant-answer.png" alt="업로드한 이미지를 근거로 인용하며 답하는 모습" style="width:100%;border-radius:var(--radius);border:1px solid var(--line);margin:20px 0;" loading="lazy" />
+
+        <h2>배포 중 실제로 겪은 문제와 해결</h2>
+        <div class="table-wrap">
+          <table class="data">
+            <thead>
+              <tr><th>증상</th><th>원인</th><th>대응</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Render 배포가 포트 바인딩 타임아웃으로 계속 실패</td>
+                <td>로컬 재순위화용 <code class="inline">sentence-transformers</code>/torch가 무료 플랜
+                  512MB 메모리에 비해 너무 무거움</td>
+                <td>로컬 cross-encoder를 제거하고, Gemini에게 후보를 다시 보여줘 재순위화시키는
+                  방식으로 교체 (무거운 의존성 자체를 삭제)</td>
+              </tr>
+              <tr>
+                <td>같은 원인으로 빌드 자체가 실패 (<code class="inline">pydantic-core</code> 빌드 에러)</td>
+                <td>Render 기본 Python 3.14용 사전 빌드 wheel이 아직 없어 소스 빌드를 시도하다 실패</td>
+                <td><code class="inline">PYTHON_VERSION</code>을 3.12로 고정해 안정적인 wheel을 쓰도록 함</td>
+              </tr>
+              <tr>
+                <td>채팅 요청이 응답 없이 계속 멈춰있음</td>
+                <td>처음엔 스트리밍/프록시 버퍼링 문제로 의심했으나, 실제로는 Gemini 무료 티어의
+                  모델별 일일 할당량(하루 20회)을 테스트하며 소진한 것 (429 오류가 재시도되며 오래 걸림)</td>
+                <td>할당량이 더 넉넉한 <code class="inline">gemini-flash-lite-latest</code>로 교체하고,
+                  로그를 직접 읽어 진짜 원인을 재확인</td>
+              </tr>
+              <tr>
+                <td>프론트 배포 후 백엔드 URL이 예측과 다름</td>
+                <td>Render 서비스 이름이 전역으로 겹쳐 임의 접미사가 붙음</td>
+                <td>실제 배포 로그에서 URL을 확인해 Vercel 환경변수를 재설정 후 재배포</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <b>배운 점</b> — 로컬에서 통과한 코드도 무료 티어의 메모리·할당량 제약 앞에서는 전혀 다른
+          문제를 드러냈습니다. 특히 "스트리밍이 안 되는 것 같다"는 증상이 실제로는 API 할당량
+          소진이었던 사례는, 추측으로 원인을 단정하지 말고 실제 서버 로그를 끝까지 읽어야 한다는
+          것을 다시 확인시켜준 경험이었습니다.
+        </div>
+
+        <h2>검색 정확도 평가</h2>
+        <p>
+          레시피·역사·과학·프로젝트 설명·이미지 등 서로 다른 주제의 문서/이미지로 평가셋을 만들고,
+          실제 검색 파이프라인을 호출해 기대하는 근거가 top-5 안에 들어오는지 확인하는 스크립트를
+          작성했습니다. 결과는 <b>Hit@5 8/8(100%), MRR 0.94</b> — 서로 다른 5개 자료를 정확히
+          구분해 찾아냅니다. (코퍼스가 작아 100%가 비교적 쉽게 나오는 조건이라는 점은 참고용으로
+          코드에도 남겨뒀습니다.)
+        </p>
+
+        <h2>느낀 점</h2>
+        <p>
+          이 프로젝트에서 가장 크게 배운 건 기술 자체보다 <b>"바이브코딩으로도 계획-구현-검증-배포를
+          제대로 된 순서로 밟으면 실제 서비스가 나온다"</b>는 확인이었습니다. 코드를 먼저 짜지 않고
+          아키텍처를 문서로 합의한 다음 단계별로 구현했고, 다 만든 뒤에도 로컬 테스트만으로 끝내지
+          않고 실제 API 키·실제 배포 환경까지 밀어붙이면서 코드만 봐서는 절대 안 보였을 문제들
+          (모델 지원 종료, 메모리 제약, 할당량, URL 충돌)을 직접 겪고 고쳤습니다. RAG를 "이론으로
+          안다"와 "직접 만들어서 배포해봤다" 사이의 간극을 이번에 메웠습니다.
+        </p>
+      </article>
+    </main>
+  </div>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
