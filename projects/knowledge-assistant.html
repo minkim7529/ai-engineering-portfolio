@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>멀티모달 지식 어시스턴트 (RAG) — 김민석 포트폴리오</title>
-<meta name="description" content="Claude Code 바이브코딩으로 설계부터 RAG 구현, 실제 웹 배포까지 진행한 멀티모달 지식 어시스턴트 프로젝트" />
+<meta name="description" content="설계부터 RAG 구현, 실제 웹 배포까지 진행한 멀티모달 지식 어시스턴트 프로젝트" />
 <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" />
@@ -30,11 +30,11 @@
       <article class="project-page reveal">
         <p class="project-kicker">PROJECT · knowledge-assistant</p>
         <h1>멀티모달 지식 어시스턴트 (RAG)</h1>
-        <p class="project-lede">Claude Code와의 바이브코딩으로 기획·설계부터 RAG 구현, 실제 웹 배포·트러블슈팅까지 전 과정을 진행한 개인 프로젝트</p>
+        <p class="project-lede">기획·설계부터 RAG 구현, 실제 웹 배포·트러블슈팅까지 전 과정을 진행한 개인 프로젝트</p>
         <div class="project-meta">
           <a href="https://github.com/minkim7529/knowledge-assistant" class="btn primary" target="_blank" rel="noopener">GitHub 저장소 →</a>
           <a href="https://frontend-two-zeta-32.vercel.app" class="btn secondary" target="_blank" rel="noopener">라이브 데모 →</a>
-          <span class="badge">개인 개발 · Claude Code 바이브코딩</span>
+          <span class="badge">개인 개발</span>
         </div>
 
         <ul class="tags">
@@ -49,7 +49,7 @@
           <div class="stat"><span class="n mono">RAG</span><span class="l">문서·이미지를 하나의 벡터 공간에서 함께 검색</span></div>
           <div class="stat"><span class="n mono">8 / 8</span><span class="l">검색 정확도 평가셋 Hit@5 (MRR 0.94)</span></div>
           <div class="stat"><span class="n mono">Vercel + Render</span><span class="l">실제 배포 후 접근 코드로 보호한 라이브 데모</span></div>
-          <div class="stat"><span class="n mono">Claude Code</span><span class="l">설계 · 구현 · 배포 · 디버깅 전 과정을 바이브코딩으로 진행</span></div>
+          <div class="stat"><span class="n mono">1인</span><span class="l">기획부터 구현·배포·디버깅까지 전 과정 혼자 진행</span></div>
         </div>
 
         <img src="../img/knowledge-assistant-ui.png" alt="멀티모달 지식 어시스턴트 UI" style="width:100%;border-radius:var(--radius);border:1px solid var(--line);margin:28px 0;" loading="lazy" />
@@ -58,22 +58,21 @@
         <p>
           기존에 만든 프로젝트들(법률상담 AI, 피부질환 분류기 등)을 되짚어보다가 한 가지 공백을 발견했습니다 —
           RAG(검색 증강 생성)를 이론으로는 정리해뒀지만 실제로 코드로 구현해본 적이 한 번도 없었습니다.
-          이 프로젝트는 그 공백을 메우기 위해, <b>Claude Code를 바이브코딩 파트너로 삼아</b> 기획 단계부터
+          이 프로젝트는 그 공백을 메우기 위해 기획 단계부터
           하이브리드 검색, 재순위화, 인용 기반 답변 생성까지 실제로 동작하는 RAG 파이프라인을 만들고,
           로컬 데모에 그치지 않고 Vercel·Render에 실제로 배포해 지금도 접속 가능한 서비스로 완성한 결과물입니다.
         </p>
 
-        <h2>진행 과정 — Claude Code와의 바이브코딩</h2>
+        <h2>진행 과정</h2>
         <ul class="list">
           <li>
-            <b>과거 프로젝트 분석 → 방향 설정</b> — 바탕화면의 기존 프로젝트 10여 개를 Claude Code가
-            직접 훑어보고, 파인튜닝·비전·풀스택 경험은 풍부하지만 RAG를 실제로 구현한 적이 없다는
-            공백을 짚어줬습니다. 이 분석을 바탕으로 "문서+이미지를 하나의 검색 공간에서 다루는
-            멀티모달 지식 어시스턴트"로 방향을 잡았습니다.
+            <b>과거 프로젝트 분석 → 방향 설정</b> — 그동안 만든 프로젝트들을 돌아보니, 파인튜닝·비전·
+            풀스택 경험은 있는데 RAG를 실제로 구현해본 적이 없다는 걸 깨달았습니다. 그래서
+            "문서+이미지를 하나의 검색 공간에서 다루는 멀티모달 지식 어시스턴트"로 방향을 잡았습니다.
           </li>
           <li>
-            <b>플랜 모드로 아키텍처 합의 후 구현</b> — 코드를 바로 짜지 않고 먼저 아키텍처(청킹 → 임베딩 →
-            하이브리드 검색 → 재순위화 → 인용 기반 생성)를 문서로 정리해 검토한 뒤, 스캐폴딩부터
+            <b>아키텍처 먼저, 구현은 그다음</b> — 코드를 바로 짜지 않고 먼저 아키텍처(청킹 → 임베딩 →
+            하이브리드 검색 → 재순위화 → 인용 기반 생성)를 정리해 검토한 뒤, 스캐폴딩부터
             문서/이미지 파이프라인, 검색, 답변 생성, 프론트엔드 채팅 UI까지 단계별로 나눠 구현했습니다.
           </li>
           <li>
@@ -186,12 +185,12 @@
 
         <h2>느낀 점</h2>
         <p>
-          이 프로젝트에서 가장 크게 배운 건 기술 자체보다 <b>"바이브코딩으로도 계획-구현-검증-배포를
-          제대로 된 순서로 밟으면 실제 서비스가 나온다"</b>는 확인이었습니다. 코드를 먼저 짜지 않고
-          아키텍처를 문서로 합의한 다음 단계별로 구현했고, 다 만든 뒤에도 로컬 테스트만으로 끝내지
-          않고 실제 API 키·실제 배포 환경까지 밀어붙이면서 코드만 봐서는 절대 안 보였을 문제들
-          (모델 지원 종료, 메모리 제약, 할당량, URL 충돌)을 직접 겪고 고쳤습니다. RAG를 "이론으로
-          안다"와 "직접 만들어서 배포해봤다" 사이의 간극을 이번에 메웠습니다.
+          이 프로젝트에서 가장 크게 배운 건 기술 자체보다 <b>계획 → 구현 → 검증 → 배포를 순서대로
+          제대로 밟으면 실제 서비스가 나온다</b>는 확인이었습니다. 코드를 먼저 짜지 않고 아키텍처부터
+          정리한 다음 단계별로 구현했고, 다 만든 뒤에도 로컬 테스트만으로 끝내지 않고 실제 API 키·
+          실제 배포 환경까지 밀어붙이면서 코드만 봐서는 절대 안 보였을 문제들(모델 지원 종료, 메모리
+          제약, 할당량, URL 충돌)을 직접 겪고 고쳤습니다. RAG를 "이론으로 안다"와 "직접 만들어서
+          배포해봤다" 사이의 간극을 이번에 메웠습니다.
         </p>
       </article>
     </main>
