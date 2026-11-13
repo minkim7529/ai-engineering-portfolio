@@ -1044,17 +1044,3 @@ section, .intro-card, .footer-card {
   .badge { text-align: left; }
   .footer-card { flex-direction: column; align-items: flex-start; }
 }
-
-/* Portfolio summaries */
-.work-facts { margin: 0 0 18px; font-size: 13px; line-height: 1.65; }
-.work-facts > div { display: grid; grid-template-columns: 2.5em minmax(0, 1fr); gap: 8px; margin-top: 8px; }
-.work-facts dt { font-weight: 700; color: var(--ink); }
-.work-facts dd { margin: 0; color: var(--ink-soft); }
-.other-projects { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); }
-.other-projects h3 { margin: 0 0 12px; font-size: 16px; }
-.other-projects ul { margin: 0; padding: 0; list-style: none; }
-.other-projects li { display: flex; flex-wrap: wrap; gap: 4px 20px; padding: 10px 0; }
-.other-projects a { min-width: 190px; color: var(--ink); font-weight: 600; }
-.other-projects span { color: var(--ink-soft); font-size: 13px; }
-.summary-list { padding-left: 20px; line-height: 1.8; }
-.summary-list li + li { margin-top: 8px; }
