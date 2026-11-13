@@ -31,8 +31,8 @@
           <div class="hero-eyebrow">AI ENGINEER PORTFOLIO — 김민석</div>
           <h1 class="hero-title">김민석<br /><span class="grad">AI Engineer & LLM Engineer</span></h1>
           <p class="hero-sub">
-            대구대학교에서 AI 관련 프로젝트를 하면서, LLM 서비스를 설계하고
-            파인튜닝하고 배포까지 직접 해봤습니다.
+            법률 도메인 파인튜닝, 로컬 LLM의 실패 유형 분석, AI를 연결한 서비스 구현을 해왔습니다.
+            프로젝트별 담당 역할과 기술적 결정, 확인 가능한 코드·학습 기록을 정리했습니다.
           </p>
           <div class="hero-actions">
             <a href="#work" class="btn primary">프로젝트 보기</a>
@@ -40,7 +40,7 @@
           </div>
           <div class="hero-meta">
             <span>대구대학교 졸업</span>
-            <span>AI·웹 프로젝트 9건 · 공학제 최우수상</span>
+            <span>LLM 대표 프로젝트 · 공학제 최우수상</span>
             <span>Python · FastAPI · PyTorch</span>
           </div>
         </div>
@@ -49,133 +49,71 @@
       <section class="work-panel reveal" id="work">
         <div class="section-head">
           <p class="section-kicker">SELECTED WORK</p>
-          <h2>LLM 서비스부터 임베디드까지, 직접 만든 프로젝트</h2>
+          <h2>파인튜닝, LLM 출력 보정, AI 서비스 구현</h2>
         </div>
         <div class="work-grid">
-
-          <a class="work-card featured" href="projects/knowledge-assistant.html">
+          <a class="work-card featured" href="projects/legal-consultation-ai.html">
             <div class="work-inner">
               <div class="work-media">
-                <span class="work-badge">🔗 실제 배포 · 라이브 데모</span>
-                <img src="img/knowledge-assistant-ui.png" alt="멀티모달 지식 어시스턴트 UI" loading="lazy" />
+                <span class="work-badge">공학제 최우수상 · 학생 4인 팀</span>
+                <img src="img/legal-ai-ui.jpg" alt="법률상담 AI 서비스 화면" loading="lazy" />
               </div>
               <div class="work-body">
-                <p class="work-kicker">PROJECT · knowledge-assistant</p>
-                <h3>멀티모달 지식 어시스턴트 (RAG)</h3>
-                <p class="work-pitch">하이브리드 검색과 재순위화가 들어간 RAG 파이프라인을 설계부터 구현까지 직접 했고, Vercel·Render에 실제로 배포하면서 생긴 문제들도 하나씩 해결했습니다.</p>
-                <ul class="work-tags">
-                  <li>RAG</li>
-                  <li>FastAPI</li>
-                  <li>Next.js</li>
-                  <li>Gemini API</li>
-                </ul>
-                <span class="work-more">자세히 보기</span>
+                <p class="work-kicker">01 · DOMAIN FINE-TUNING</p>
+                <h3>법률상담 AI</h3>
+                <p class="work-pitch">법률 질의응답에 맞춘 Llama 3.1 8B 파인튜닝과 Gradio 시연 서비스.</p>
+                <dl class="work-facts">
+                  <div><dt>담당</dt><dd>모델·데이터셋 조사, 학습 코드, 성능 개선·분석, 웹 개발</dd></div>
+                  <div><dt>결정</dt><dd>4bit 모델과 LoRA로 학습 자원을 줄이고, 반복·미완결 문장을 후처리</dd></div>
+                  <div><dt>근거</dt><dd>공개 노트북에 53,480건 · 1 epoch · 1,671 step 학습 기록 수록</dd></div>
+                </dl>
+                <ul class="work-tags"><li>Python</li><li>LoRA / Unsloth</li><li>Gradio</li></ul>
+                <span class="work-more">담당 역할과 학습 기록 보기</span>
               </div>
             </div>
           </a>
-
-          <a class="work-card" href="projects/legal-consultation-ai.html" style="--i:0">
-            <div class="work-media">
-              <span class="work-badge">🏆 공학제 최우수상</span>
-              <img src="img/legal-ai-ui.jpg" alt="법률상담 AI 서비스 UI" loading="lazy" />
-            </div>
-            <div class="work-body">
-              <p class="work-kicker">PROJECT · legal-consultation-ai</p>
-              <h3>법률상담 AI</h3>
-              <p class="work-pitch">Llama 3.1 8B를 LoRA로 파인튜닝해서 만든 법률상담 서비스입니다. 5인 팀에서 데이터 정제, 학습, Gradio 배포까지 맡아서 진행했습니다.</p>
-              <ul class="work-tags">
-                <li>Llama 3.1 8B</li>
-                <li>LoRA / Unsloth</li>
-                <li>Gradio</li>
-              </ul>
-              <span class="work-more">자세히 보기</span>
-            </div>
-          </a>
-
           <a class="work-card" href="projects/vtuber-companion.html" style="--i:1">
-            <div class="work-media work-media--fallback grad-1">
-              <span class="work-num">01</span>
-            </div>
+            <div class="work-media work-media--fallback grad-1"><span class="work-num">LLM</span></div>
             <div class="work-body">
-              <p class="work-kicker">PROJECT · vtuber-companion</p>
+              <p class="work-kicker">02 · LLM APPLICATION</p>
               <h3>로컬 LLM 보이스 컴패니언</h3>
-              <p class="work-pitch">Ollama와 Gemini 백엔드를 번갈아 붙여보면서, 소형 로컬 모델에서 자주 나오는 실패 유형들을 규칙 기반으로 하나씩 보정했습니다.</p>
-              <ul class="work-tags">
-                <li>FastAPI / WebSocket</li>
-                <li>Ollama · Gemini</li>
-              </ul>
-              <span class="work-more">자세히 보기</span>
+              <p class="work-pitch">Open-LLM-VTuber를 확장해 로컬 모델의 정체성 역전, 한자 혼입, 반복 발화에 대응했습니다.</p>
+              <dl class="work-facts">
+                <div><dt>담당</dt><dd>Ollama 네이티브 백엔드, 스트리밍 필터, 발화 보정 로직</dd></div>
+                <div><dt>결정</dt><dd>모델 교체 실험과 규칙 기반 보정을 구분하고 효과가 적었던 temperature 변경은 되돌림</dd></div>
+                <div><dt>근거</dt><dd>15개 파일 변경 패치와 실패 유형별 대응 과정 공개</dd></div>
+              </dl>
+              <ul class="work-tags"><li>Python / asyncio</li><li>Ollama</li><li>Gemini</li></ul>
+              <span class="work-more">실험과 변경 코드 보기</span>
             </div>
           </a>
-
-          <a class="work-card" href="projects/goods-shop.html" style="--i:2">
+          <a class="work-card" href="projects/ai-stock-trading-program.html" style="--i:2">
             <div class="work-media">
-              <img src="img/goods-shop-list.jpg" alt="Goods Shop 굿즈 리스트 화면" loading="lazy" />
+              <span class="work-badge">자동 테스트 79개 통과</span>
+              <img src="img/stockpilot-paper-kr.png" alt="StockPilot 국내 모의투자 화면 — 합성 예시 데이터" loading="lazy" />
             </div>
             <div class="work-body">
-              <p class="work-kicker">PROJECT · goods-shop</p>
-              <h3>Goods Shop 웹 프로젝트</h3>
-              <p class="work-pitch">카카오톡 이모티콘 캐릭터 굿즈를 파는 Java MVC 쇼핑몰입니다. 장바구니, 게시판, 챗봇 프로토타입까지 혼자 만들었습니다.</p>
-              <ul class="work-tags">
-                <li>Java</li>
-                <li>MVC</li>
-              </ul>
-              <span class="work-more">자세히 보기</span>
+              <p class="work-kicker">03 · AI SERVICE ENGINEERING</p>
+              <h3>StockPilot · AI 주식 분석·모의투자</h3>
+              <p class="work-pitch">시세·뉴스와 Gemini 판단을 연결한 Windows 데스크톱 앱입니다.</p>
+              <dl class="work-facts">
+                <div><dt>구현</dt><dd>Electron UI, 시세 수집, AI 판단, 모의 장부와 주문 검증</dd></div>
+                <div><dt>결정</dt><dd>모의·실계좌 경로를 분리하고 중복 주문·오래된 시세를 차단</dd></div>
+                <div><dt>근거</dt><dd>2026.11.14 공개 코드 기준 자동 테스트 79개 통과. 실제 운용 성과와 별개</dd></div>
+              </dl>
+              <ul class="work-tags"><li>Node.js</li><li>Electron</li><li>Gemini API</li></ul>
+              <span class="work-more">구조와 검증 범위 보기</span>
             </div>
           </a>
-
-          <a class="work-card" href="projects/hackathon-seolstudy.html" style="--i:3">
-            <div class="work-media work-media--fallback grad-2">
-              <span class="work-badge">🏆 본선 진출</span>
-              <span class="work-num">02</span>
-            </div>
-            <div class="work-body">
-              <p class="work-kicker">PROJECT · hackathon-seolstudy</p>
-              <h3>설스터디</h3>
-              <p class="work-pitch">블레이버스 제4회 MVP 개발 해커톤에 6인 팀으로 참가해서, 프론트엔드를 맡아 수능 학습 코칭 플랫폼을 만들었습니다.</p>
-              <ul class="work-tags">
-                <li>Next.js 16</li>
-                <li>TypeScript</li>
-              </ul>
-              <span class="work-more">자세히 보기</span>
-            </div>
-          </a>
-
-          <a class="work-card" href="projects/skin-disease-classifier.html" style="--i:4">
-            <div class="work-media work-media--fallback grad-3">
-              <span class="work-num">03</span>
-            </div>
-            <div class="work-body">
-              <p class="work-kicker">PROJECT · skin-disease-classifier</p>
-              <h3>피부질환 분류 알고리즘</h3>
-              <p class="work-pitch">여드름·습진·피부암·정상 피부 4종을 분류하는 CNN을 만들었는데, ResNet 스타일 skip-connection까지 직접 설계했습니다.</p>
-              <ul class="work-tags">
-                <li>PyTorch</li>
-                <li>CNN</li>
-              </ul>
-              <span class="work-more">자세히 보기</span>
-            </div>
-          </a>
-
-          <a class="work-card closer" href="projects/drowsy-reading-stand.html" style="--i:5">
-            <div class="work-inner">
-              <div class="work-media work-media--fallback grad-4">
-                <span class="work-num">04</span>
-              </div>
-              <div class="work-body">
-                <p class="work-kicker">PROJECT · drowsy-reading-stand</p>
-                <h3>졸음방지 독서대</h3>
-                <p class="work-pitch">Dlib 얼굴 랜드마크와 CNN으로 눈 상태를 분류해서 졸음을 감지하고, 아두이노 서보모터로 각도를 자동 조절하는 독서대를 2인 팀에서 만들었습니다.</p>
-                <ul class="work-tags">
-                  <li>Arduino</li>
-                  <li>Dlib</li>
-                  <li>CNN</li>
-                </ul>
-                <span class="work-more">자세히 보기</span>
-              </div>
-            </div>
-          </a>
-
+        </div>
+        <div class="other-projects">
+          <h3>그 외 프로젝트</h3>
+          <ul>
+            <li><a href="projects/hackathon-seolstudy.html">설스터디</a><span>6인 팀 · 학습 코칭 서비스 프론트엔드</span></li>
+            <li><a href="projects/goods-shop.html">Goods Shop</a><span>개인 프로젝트 · Java MVC 쇼핑몰</span></li>
+            <li><a href="projects/skin-disease-classifier.html">피부질환 분류 알고리즘</a><span>3인 팀 · 데이터 정제와 모델 학습</span></li>
+            <li><a href="projects/drowsy-reading-stand.html">졸음방지 독서대</a><span>2인 팀 · CNN 눈 상태 분류와 하드웨어 설계 기록</span></li>
+          </ul>
         </div>
       </section>
 
@@ -183,16 +121,16 @@
         <div>
           <p class="section-kicker">ABOUT THE WORK</p>
           <p class="intro-copy">
-            여기 모아둔 건 대부분 LLM 관련 프로젝트입니다.
+            대표작은 파인튜닝, 로컬 LLM 실험, AI 서비스 구현으로 구성했습니다.
             로컬에서 돌아가는 실시간 음성 AI부터 법률 도메인 파인튜닝 모델까지,
-            직접 실험해보고 서비스로 만들어본 것들입니다.
+            실험과 서비스 구현을 이어온 작업들입니다.
             모델을 돌리는 것 자체보다, <strong>어디서 왜 실패하는지 찾고 고치는 데</strong> 시간을 더 많이 썼습니다.
           </p>
         </div>
         <div class="intro-points">
           <div class="point-card">
             <strong>실무형 문제 해결</strong>
-            <span>프롬프트, 백엔드 구조, 후처리 파이프라인, 안정성 장치까지 직접 설계했습니다.</span>
+            <span>프로젝트별 프롬프트, 후처리, 주문 검증 로직과 예외 상황을 코드로 다뤘습니다.</span>
           </div>
           <div class="point-card">
             <strong>모델 실험 경험</strong>
@@ -216,7 +154,7 @@
             <p>프롬프트 설계, 모델 선택, 스트리밍 응답 처리, 실패 유형 분석까지 서비스를 만드는 관점에서 다뤄봤습니다.</p>
             <ul>
               <li>Ollama / Gemini 백엔드 실험</li>
-              <li>실시간 대화 구조 설계</li>
+              <li>오픈소스 음성 대화 시스템 확장</li>
               <li>출력 정제·가드레일 구현</li>
             </ul>
           </article>
@@ -234,7 +172,7 @@
             <p>API 서버, 웹 인터페이스, 모델 학습 파이프라인까지 직접 연결해봤습니다.</p>
             <ul>
               <li>Python / FastAPI / Gradio</li>
-              <li>Next.js / TypeScript / Prisma</li>
+              <li>Node.js / Electron / TypeScript</li>
               <li>WebSocket·Socket.IO, 배포·문서화 경험</li>
             </ul>
           </article>
@@ -250,7 +188,7 @@
           <article class="info-card">
             <h3>Experience</h3>
             <ul>
-              <li>AI/웹 엔지니어링 프로젝트 9개 수행</li>
+              <li>파인튜닝 · LLM 응용 · AI 서비스 구현 경험</li>
               <li>로컬 LLM과 클라우드 LLM 비교 실험 경험</li>
               <li>법률 도메인 데이터셋 기반 파인튜닝 프로젝트 진행</li>
             </ul>
@@ -268,7 +206,7 @@
             <ul>
               <li>Python, FastAPI, Gradio</li>
               <li>PyTorch, LoRA, Unsloth</li>
-              <li>Next.js, TypeScript, Prisma, Socket.IO</li>
+              <li>Node.js, Electron, Next.js, TypeScript</li>
             </ul>
           </article>
           <article class="info-card contact-card">

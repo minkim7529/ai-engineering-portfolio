@@ -1,43 +1,31 @@
-# AI Engineering Portfolio
+# 김민석 · AI / LLM Engineering Portfolio
 
-김민석의 AI 엔지니어링 포트폴리오 사이트. 빌드 도구 없이 순수 HTML/CSS/JS로 작성했습니다.
+**[포트폴리오 사이트 열기](https://minkim7529.github.io/ai-engineering-portfolio/)** · [GitHub 프로필](https://github.com/minkim7529) · [이메일](mailto:kms7529@naver.com)
 
-## 로컬에서 보기
+AI·LLM 엔지니어 지원을 위한 프로젝트 포트폴리오입니다. 각 대표작의 문제, 담당 역할, 기술적 결정, 공개된 검증 자료를 정리했습니다.
 
-파일 탐색기에서 `index.html`을 더블클릭해도 되지만, 상대 경로 문제 없이 보려면
-VS Code의 **Live Server** 확장을 추천합니다.
+## 대표 프로젝트
 
-1. VS Code에서 이 폴더(`portfolio-site`)를 엽니다.
-2. 확장 마켓플레이스에서 `Live Server` (ritwickdey) 설치.
-3. `index.html`을 우클릭 → **Open with Live Server**.
+1. **[법률상담 AI](https://github.com/minkim7529/legal-consultation-ai)** — Llama 3.1 8B LoRA 파인튜닝, 학습·서빙 노트북과 데이터 샘플 공개. 학생 4인 팀 졸업작품, 공학제 최우수상.
+2. **[로컬 LLM 보이스 컴패니언](https://github.com/minkim7529/vtuber-ollama-gemini-experiments)** — Open-LLM-VTuber 기반 Ollama/Gemini 실험과 출력 보정. 직접 수정한 15개 파일의 패치 공개.
+3. **[StockPilot](https://github.com/minkim7529/ai-stock-trading-program)** — 시세·뉴스·Gemini 판단을 연결한 데스크톱 앱. 장부 분리·주문 검증 등 자동 테스트 79개 통과 기록.
 
-## 구조
+## 구조와 수정
 
+- `index.html`: 대표작 요약, 핵심 역량, 연락처
+- `projects/`: 프로젝트별 상세 설명과 근거 링크
+- `js/main.js`: 공통 프로필, 프로젝트 메뉴, 테마 전환
+- `css/style.css`: 반응형 레이아웃과 라이트·다크 테마
+- `img/`: 프로젝트 화면과 설명 이미지
+
+공통 연락처와 메뉴는 `js/main.js`에서 수정합니다. 상세 내용은 각 HTML 파일에서 수정하며, 브라우저에서 문서를 직접 편집하는 기능은 없습니다.
+
+## 로컬 확인과 배포
+
+빌드 도구가 없는 HTML/CSS/JavaScript 정적 사이트입니다. 저장소 루트에서 아래 명령으로 열 수 있습니다.
+
+```sh
+python -m http.server 8000 --bind 127.0.0.1
 ```
-portfolio-site/
-├── index.html      # 전체 페이지 구조/내용
-├── css/style.css    # 디자인 토큰 + 컴포넌트 스타일 (라이트/다크 테마 포함)
-├── js/main.js       # 테마 토글, 스크롤 스파이 내비게이션, 스크롤 reveal 애니메이션
-└── favicon.svg
-```
 
-## 수정 방법
-
-- **내용 수정**: `index.html`에서 해당 섹션의 텍스트를 직접 편집합니다.
-- **법률상담 AI 섹션의 "본인 담당 파트"**: 페이지에서 빨간 배경으로 표시된
-  부분을 브라우저에서 직접 클릭해 입력할 수 있습니다(`contenteditable`).
-  단, 새로고침하면 초기화되니 실제로 반영하려면 `index.html`의 해당 텍스트를
-  직접 고쳐야 합니다.
-- **색상/폰트**: `css/style.css` 상단 `:root` 안의 CSS 변수(`--accent`, `--paper` 등)만
-  바꾸면 전체 배색이 바뀝니다.
-- **테마 토글**: 우측 상단 해/달 아이콘 버튼. 선택한 테마는 `localStorage`에
-  저장되어 다음 방문 때도 유지됩니다.
-
-## 배포
-
-빌드 과정이 없는 정적 사이트라 아무 정적 호스팅에나 바로 올릴 수 있습니다.
-
-- **GitHub Pages**: 이 폴더를 GitHub 저장소에 올리고 Settings → Pages에서
-  브랜치를 지정하면 끝.
-- **Vercel/Netlify**: 저장소를 연결하면 빌드 명령 없이(Framework: `Other`)
-  바로 배포됩니다.
+브라우저에서 `http://127.0.0.1:8000`에 접속합니다. GitHub Pages는 `master` 브랜치의 루트(`/`)를 배포합니다.

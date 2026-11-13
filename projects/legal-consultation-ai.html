@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>법률상담 AI — 김민석 포트폴리오</title>
-<meta name="description" content="Llama 3.1 8B를 LoRA로 파인튜닝해 만든 법률상담 AI — 4인 팀 졸업작품, 대구대학교 공학제 최우수상" />
+<meta name="description" content="Llama 3.1 8B를 LoRA로 파인튜닝해 만든 법률상담 AI — 학생 4인 팀 졸업작품, 대구대학교 공학제 최우수상" />
 <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" />
@@ -30,7 +30,7 @@
       <article class="project-page reveal">
         <p class="project-kicker">PROJECT · legal-consultation-ai</p>
         <h1>법률상담 AI</h1>
-        <p class="project-lede">Llama 3.1 8B를 LoRA로 파인튜닝해 만든 법률상담 AI — 4인 팀 졸업작품, 대구대학교 공학제 최우수상</p>
+        <p class="project-lede">Llama 3.1 8B를 LoRA로 파인튜닝해 만든 법률상담 AI — 학생 4인 팀 졸업작품, 대구대학교 공학제 최우수상</p>
         <div class="project-meta">
           <a href="https://github.com/minkim7529/legal-consultation-ai" class="btn primary" target="_blank" rel="noopener">GitHub 저장소 (노트북·보고서·논문) →</a>
           <span class="badge">🏆 공학제 최우수상</span>
@@ -39,17 +39,16 @@
         <ul class="tags">
           <li>Llama 3.1 8B</li>
           <li>LoRA / Unsloth</li>
-          <li>HF SFTTrainer</li>
+          <li>Transformers Trainer</li>
           <li>Google Colab Pro · A100</li>
           <li>Gradio</li>
-          <li>4인 팀 · 대구대</li>
+          <li>학생 4인 · 지도교수 1명</li>
         </ul>
 
         <div class="callout">
-          <b>학술지 게재</b> — 이 작품은 논문으로 정리되어 대구대학교
-          정보통신연구소 학술지 《정보통신연구》 제17집 제1호(Vol. 20 No. 2,
-          2025)에 게재되었습니다. 저자: 김지환·김두한·김민석·신영훈(지도교수
-          김희철), 국문 요약과 영문 Abstract를 함께 수록했습니다.
+          <b>담당 역할</b> — 모델·데이터셋 조사, 학습 모델 코딩, 성능 개선·분석, 웹 프로그래밍 개발에 참여했습니다.
+          학생 팀원은 김지환·김두한·김민석·신영훈 4명이며, 지도교수는 김희철 교수입니다.
+          저장소에는 학습·서빙 노트북과 논문 초안이 공개되어 있습니다. 학술지 게재 여부는 확인되지 않았습니다.
         </div>
 
         <div class="stats">
@@ -68,7 +67,7 @@
           법률상담이 여전히 상담원·변호사와의 직접 대면에 의존하고 있다는
           뜻입니다. 일반적인 법률
           서비스가 고비용·긴 대기시간·복잡한 절차로 이용자에게 부담을 준다는
-          문제의식에서, 4인 팀(김지환·김두한·김민석·신영훈, 지도교수 김희철)으로
+          문제의식에서, 학생 4인 팀(김지환·김두한·김민석·신영훈, 지도교수 김희철)으로
           진행한 졸업작품에서 Llama 3.1을 한국어 법률 QA 데이터로 파인튜닝해
           시간·비용 제약 없이 1차 법률 자문을 받을 수 있는 챗봇을 만들었습니다.
           판례나 유사 사례를 참고해 답변하는 기능도 목표로 삼았습니다. 그
@@ -93,18 +92,13 @@
         <table class="spectable">
           <tr><th>하드웨어</th><td>Google Colab Pro, A100 GPU(VRAM 40GB), RAM 83GB</td></tr>
           <tr><th>Python</th><td>3.10</td></tr>
-          <tr><th>패키지</th><td>Unsloth(FastLanguageModel), Hugging Face SFTTrainer, Transformers, Torch, TorchVision, Wandb, Gradio</td></tr>
+          <tr><th>패키지</th><td>Unsloth(FastLanguageModel), Hugging Face Transformers Trainer, Transformers, Torch, TorchVision, Wandb, Gradio</td></tr>
           <tr><th>Tools</th><td>Google Colab, Visual Studio, Jupyter Notebook, IntelliJ, Spring Boot, Bootstrap, CSS, HTML, JavaScript</td></tr>
         </table>
         <p>
-          학습 가속에는 Unsloth를 사용했습니다. Colab 무료/Pro GPU에서도 Llama 3
-          8B급 파인튜닝이 가능하도록 만들어주는 프레임워크로, 공식 벤치마크
-          기준 학습 속도를 약 4~5배 끌어올리고 VRAM 사용량도 크게 줄여줍니다.
-          Supervised fine-tuning 자체는 Hugging Face TRL의
-          <code class="inline">SFTTrainer</code> 계열 도구로 진행했는데, 처음부터
-          학습하는 범용 <code class="inline">Trainer</code>와 달리 사전학습된 모델을
-          대화형 지시문-응답 형식으로 가볍게 지도학습시키는 데 특화되어 있고,
-          LoRA와 결합하면 적은 데이터로도 빠르게 학습할 수 있습니다.
+          공개 학습 노트북은 Unsloth의 <code class="inline">FastLanguageModel</code>로 4bit 모델을 불러오고,
+          LoRA를 적용한 뒤 Hugging Face Transformers의 <code class="inline">Trainer</code>로 학습합니다.
+          데이터 콜레이터에서 지시문·입력·답변을 토큰화하며, 공개된 최종 설정은 1 epoch와 학습률 1.5e-5입니다.
         </p>
 
         <h2>개발 업무 분장</h2>
@@ -180,7 +174,7 @@
           <figcaption>그림 2. 모델별 성능 비교 — Llama 3 8B가 대부분의 항목에서 우위</figcaption>
         </figure>
 
-        <h2>모델 훈련 및 검증</h2>
+        <h2>학습 기록 — 초기 실험과 최종 공개 버전</h2>
         <p>
           <code class="inline">unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit</code>
           4bit 모델을 Unsloth의 <code class="inline">FastLanguageModel</code>로 불러온 뒤
@@ -201,7 +195,7 @@
           </div>
           <div class="cell chosen">
             <div class="ep mono">EPOCH 2</div>
-            <div class="verdict">채택</div>
+            <div class="verdict">초기 실험에서 선호</div>
             <div class="desc">가장 안정적이고 명확한 출력</div>
           </div>
           <div class="cell">
@@ -213,7 +207,7 @@
         <p>
           다만 실제로 Hugging Face에 최종 업로드하고 Gradio 데모에 연결한
           모델은, 정제된 데이터셋(53,480건)을 기준으로 학습 시간을 고려해
-          1 epoch(총 1,671 step)만 학습한 버전입니다. 아래는 실제로 실행한
+          1 epoch(총 1,671 step) 학습 버전입니다. 위의 2 epoch는 초기 실험 관찰이며 최종 공개 설정과 구분합니다. 아래는 실제로 실행한
           학습 노트북의 핵심 셀입니다.
         </p>
         <div class="codeblock">

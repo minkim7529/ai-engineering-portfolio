@@ -1,8 +1,8 @@
 const PROFILE = {
   name: "김민석",
   role: "AI Engineer & LLM Engineer",
-  emailLabel: "km7529@naver.com",
-  email: "mailto:km7529@naver.com",
+  emailLabel: "kms7529@naver.com",
+  email: "mailto:kms7529@naver.com",
   phone: "010-6787-7529",
   address: "군산시 미장동",
   education: "대구대학교 AI학과 졸업",
@@ -22,15 +22,20 @@ const SKILLS = [
 
 const NAV_GROUPS = [
   {
-    label: "PROJECTS",
+    label: "SELECTED WORK",
     items: [
-      { slug: "knowledge-assistant", title: "멀티모달 지식 어시스턴트 (RAG)", repo: "knowledge-assistant" },
-      { slug: "vtuber-companion", title: "로컬 LLM 보이스 컴패니언", repo: "vtuber-ollama-gemini-experiments" },
       { slug: "legal-consultation-ai", title: "법률상담 AI", repo: "legal-consultation-ai", award: true },
-      { slug: "hackathon-seolstudy", title: "설스터디 (해커톤)", repo: "hackathon-seolstudy", award: true },
+      { slug: "vtuber-companion", title: "로컬 LLM 보이스 컴패니언", repo: "vtuber-ollama-gemini-experiments" },
+      { slug: "ai-stock-trading-program", title: "StockPilot · AI 주식 분석", repo: "ai-stock-trading-program" },
+    ],
+  },
+  {
+    label: "OTHER PROJECTS",
+    items: [
+      { slug: "hackathon-seolstudy", title: "설스터디 (해커톤)", repo: "hackathon-seolstudy" },
       { slug: "goods-shop", title: "Goods Shop 웹 프로젝트", repo: "goods-shop" },
-      { slug: "drowsy-reading-stand", title: "졸음방지 독서대", repo: "drowsy-reading-stand" },
       { slug: "skin-disease-classifier", title: "피부질환 분류 알고리즘", repo: "skin-disease-classifier" },
+      { slug: "drowsy-reading-stand", title: "졸음방지 독서대", repo: "drowsy-reading-stand" },
     ],
   },
 ];
@@ -67,6 +72,7 @@ const NAV_GROUPS = [
     const active = mount.dataset.active || "";
 
     const infoRow = (label, value, href) => {
+      if (!value) return "";
       const val = href
         ? `<a class="v" href="${href}" target="_blank" rel="noopener">${value}</a>`
         : value
