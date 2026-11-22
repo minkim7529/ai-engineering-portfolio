@@ -1,6 +1,6 @@
 const PROFILE = {
   name: "김민석",
-  role: "AI Engineer & LLM Engineer",
+  role: "신입 AI 서비스 개발자",
   emailLabel: "kms7529@naver.com",
   email: "mailto:kms7529@naver.com",
   phone: "010-6787-7529",
@@ -27,6 +27,7 @@ const NAV_GROUPS = [
       { slug: "legal-consultation-ai", title: "법률상담 AI", repo: "legal-consultation-ai", award: true },
       { slug: "vtuber-companion", title: "로컬 LLM 보이스 컴패니언", repo: "vtuber-ollama-gemini-experiments" },
       { slug: "ai-stock-trading-program", title: "StockPilot · AI 주식 분석", repo: "ai-stock-trading-program" },
+      { slug: "ai-daily", title: "AI Daily · 데이터 수집 API", repo: "ai-daily" },
       { slug: "hackathon-seolstudy", title: "설스터디 (해커톤)", repo: "hackathon-seolstudy", award: true },
       { slug: "goods-shop", title: "Goods Shop 웹 프로젝트", repo: "goods-shop" },
       { slug: "drowsy-reading-stand", title: "졸음방지 독서대", repo: "drowsy-reading-stand" },

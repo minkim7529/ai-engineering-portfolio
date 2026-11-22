@@ -30,7 +30,7 @@
       <article class="project-page reveal">
         <p class="project-kicker">PROJECT · skin-disease-classifier</p>
         <h1>피부질환 분류 알고리즘</h1>
-        <p class="project-lede">여드름·습진·피부암·정상 피부 4종을 분류하는 ResNet 스타일 CNN을 처음부터 설계</p>
+        <p class="project-lede">여드름·습진·피부암·정상 피부 4종 이미지 분류 팀 프로젝트 · 데이터 정제와 모델 학습 담당</p>
         <div class="project-meta">
           <a href="https://github.com/minkim7529/skin-disease-classifier" class="btn primary" target="_blank" rel="noopener">GitHub 저장소 →</a>
           <span class="badge">3인 팀 · 수업 프로젝트</span>
@@ -49,7 +49,7 @@
           3인 팀(구승율, 김민석, 김영준) 수업 프로젝트입니다. 본인 담당은
           <b>데이터 정제, 모델 학습 및 실행</b>입니다. ResNet 스타일의
           skip-connection 블록(<code class="inline">Convbox</code>)을 4개 층으로 쌓고, 배치
-          사이즈(32/64/128)·에폭(5 단위)·드롭아웃 조합을 직접 스윕하며 과적합
+          사이즈(32/64/128)·에폭(5 단위) 조합을 직접 스윕하며 과적합
           구간과 최적점을 실측으로 찾았습니다.
         </p>
 
@@ -60,16 +60,16 @@
           train:test = 8:2로 정제했습니다.
         </p>
 
-        <h2>모델 구조</h2>
+        <h2>팀 모델 구조</h2><p>모델 설계는 팀원이 담당했습니다. 발표자료에서 복원한 공개 model.py에는 드롭아웃이 선언돼 있으나 forward에서 호출되지 않습니다.</p>
         <div class="table-wrap">
           <table class="data">
             <tbody>
               <tr><td class="mono">Input</td><td>3×224×224</td></tr>
               <tr><td class="mono">Stem</td><td>Conv7x7(64) + BN + ReLU + MaxPool</td></tr>
               <tr><td class="mono">Layer1</td><td>Convbox(64→64) × 3</td></tr>
-              <tr><td class="mono">Layer2</td><td>Convbox(64→128, stride2) × 4 (+dropout)</td></tr>
-              <tr><td class="mono">Layer3</td><td>Convbox(128→256, stride2) × 6 (+dropout)</td></tr>
-              <tr><td class="mono">Layer4</td><td>Convbox(256→512, stride2) × 3 (+dropout)</td></tr>
+              <tr><td class="mono">Layer2</td><td>Convbox(64→128, stride2) × 4</td></tr>
+              <tr><td class="mono">Layer3</td><td>Convbox(128→256, stride2) × 6</td></tr>
+              <tr><td class="mono">Layer4</td><td>Convbox(256→512, stride2) × 3</td></tr>
               <tr><td class="mono">Head</td><td>AdaptiveAvgPool(1×1) → FC(512 → num_classes)</td></tr>
             </tbody>
           </table>
@@ -201,7 +201,7 @@ for e in range(hyper_param_epoch):
         </figure>
 
         <div class="limits">
-          <b>결과 및 한계</b> — 검증 정확도는 약 99% 이상으로 매우 높게 나왔는데,
+          <b>결과 및 한계</b> — 수업 발표자료에 보고된 정확도는 약 99%로,
           발표 슬라이드에서도 스스로 분석했듯 "이미지 사이즈가 작고 이진 분류가
           아닌 4-class이지만 클래스 간 시각적 차이가 뚜렷해 정확도가 높게 나온
           것"으로 보고 있습니다. 상용 피부과 진단 도구를 대체하려는 목적이
@@ -214,7 +214,7 @@ for e in range(hyper_param_epoch):
 
         <h2>느낀 점</h2>
         <p>
-          배치 사이즈·에폭·드롭아웃을 직접 스윕하면서, 파라미터를 하나 바꿀
+          배치 사이즈·에폭을 직접 스윕하면서, 파라미터를 하나 바꿀
           때마다 정확도가 어떻게 움직이는지 실측으로 확인하는 과정이 감으로
           설계할 때보다 훨씬 신뢰할 수 있는 결정을 하게 해준다는 걸
           배웠습니다. 동시에 검증 정확도가 99%대로 높게 나온 것을 보고 바로

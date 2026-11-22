@@ -1,0 +1,652 @@
+TAP version 13
+# Subtest: broker automation never starts by loading saved state
+ok 1 - broker automation never starts by loading saved state
+  ---
+  duration_ms: 2.9387
+  type: 'test'
+  ...
+# Subtest: automation requires broker, AI and exact environment-specific start confirmation
+ok 2 - automation requires broker, AI and exact environment-specific start confirmation
+  ---
+  duration_ms: 0.8678
+  type: 'test'
+  ...
+# Subtest: dynamic instrument mapping fails closed for unknown symbols/exchanges
+ok 3 - dynamic instrument mapping fails closed for unknown symbols/exchanges
+  ---
+  duration_ms: 0.4249
+  type: 'test'
+  ...
+# Subtest: automated order size is integer cash-only and limited to a quarter of budget
+ok 4 - automated order size is integer cash-only and limited to a quarter of budget
+  ---
+  duration_ms: 0.6363
+  type: 'test'
+  ...
+# Subtest: KOSDAQ holding code matches without Yahoo suffix ambiguity
+ok 5 - KOSDAQ holding code matches without Yahoo suffix ambiguity
+  ---
+  duration_ms: 0.3797
+  type: 'test'
+  ...
+# Subtest: mock automatic submission records evidence and accepted status, not invented fill
+ok 6 - mock automatic submission records evidence and accepted status, not invented fill
+  ---
+  duration_ms: 25.4267
+  type: 'test'
+  ...
+# Subtest: stop while broker preparation is pending prevents transmission
+ok 7 - stop while broker preparation is pending prevents transmission
+  ---
+  duration_ms: 0.6821
+  type: 'test'
+  ...
+# Subtest: unknown transmission never retries and disables automation
+ok 8 - unknown transmission never retries and disables automation
+  ---
+  duration_ms: 0.4108
+  type: 'test'
+  ...
+# Subtest: broker guard runs after hashing and before actual trading request
+ok 9 - broker guard runs after hashing and before actual trading request
+  ---
+  duration_ms: 578.8728
+  type: 'test'
+  ...
+# Subtest: a stop arriving while enable checks balance cannot be undone by late completion
+ok 10 - a stop arriving while enable checks balance cannot be undone by late completion
+  ---
+  duration_ms: 2.2875
+  type: 'test'
+  ...
+# Subtest: settled orders with the same news fingerprint are not repeated
+ok 11 - settled orders with the same news fingerprint are not repeated
+  ---
+  duration_ms: 0.603
+  type: 'test'
+  ...
+# Subtest: 5% locked real account cannot generate a new automatic buy
+ok 12 - 5% locked real account cannot generate a new automatic buy
+  ---
+  duration_ms: 0.1076
+  type: 'test'
+  ...
+# Subtest: full automation cycle links discovery and AI to one mock broker submission
+ok 13 - full automation cycle links discovery and AI to one mock broker submission
+  ---
+  duration_ms: 0.6644
+  type: 'test'
+  ...
+# Subtest: late AI completion after emergency stop cannot submit a broker order
+ok 14 - late AI completion after emergency stop cannot submit a broker order
+  ---
+  duration_ms: 0.2064
+  type: 'test'
+  ...
+# Subtest: local server requires session + origin, never invents capital, persists settings
+ok 15 - local server requires session + origin, never invents capital, persists settings
+  ---
+  duration_ms: 675.9341
+  type: 'test'
+  ...
+# Subtest: leaders sorts positive daily returns, deduplicates and caps at ten
+ok 16 - leaders sorts positive daily returns, deduplicates and caps at ten
+  ---
+  duration_ms: 1.5829
+  type: 'test'
+  ...
+# Subtest: US leaders use regular daily percentage and timestamp, not postmarket change
+ok 17 - US leaders use regular daily percentage and timestamp, not postmarket change
+  ---
+  duration_ms: 1.4928
+  type: 'test'
+  ...
+# Subtest: failed refresh preserves previous records with explicit error independently per market
+ok 18 - failed refresh preserves previous records with explicit error independently per market
+  ---
+  duration_ms: 0.4899
+  type: 'test'
+  ...
+# Subtest: live execution accepts new symbols, uses cash, fees, no duplicate quote fills
+ok 19 - live execution accepts new symbols, uses cash, fees, no duplicate quote fills
+  ---
+  duration_ms: 4.8382
+  type: 'test'
+  ...
+# Subtest: live execution blocks stale, closed, future quotes and missing FX
+ok 20 - live execution blocks stale, closed, future quotes and missing FX
+  ---
+  duration_ms: 0.3121
+  type: 'test'
+  ...
+# Subtest: live loss lock survives recovery but allows AI sell
+ok 21 - live loss lock survives recovery but allows AI sell
+  ---
+  duration_ms: 0.4744
+  type: 'test'
+  ...
+# Subtest: live ungrounded and invented AI orders are rejected
+ok 22 - live ungrounded and invented AI orders are rejected
+  ---
+  duration_ms: 1.1628
+  type: 'test'
+  ...
+# Subtest: no external AI key means no simulation starts or fake AI trades
+ok 23 - no external AI key means no simulation starts or fake AI trades
+  ---
+  duration_ms: 2.2356
+  type: 'test'
+  ...
+# Subtest: paused live session cannot execute a queued decision
+ok 24 - paused live session cannot execute a queued decision
+  ---
+  duration_ms: 0.2119
+  type: 'test'
+  ...
+# Subtest: live Gemini response drives a simulated trade without broker or account data
+ok 25 - live Gemini response drives a simulated trade without broker or account data
+  ---
+  duration_ms: 34.2115
+  type: 'test'
+  ...
+# Subtest: KR provider obsolete 15:00 end becomes 15:30, no holiday dates invented
+ok 26 - KR provider obsolete 15:00 end becomes 15:30, no holiday dates invented
+  ---
+  duration_ms: 1.189
+  type: 'test'
+  ...
+# Subtest: domestic rotation is not starved by US-first universe and US screeners
+ok 27 - domestic rotation is not starved by US-first universe and US screeners
+  ---
+  duration_ms: 0.6078
+  type: 'test'
+  ...
+# Subtest: freshness and market time rejection reasons remain distinct
+ok 28 - freshness and market time rejection reasons remain distinct
+  ---
+  duration_ms: 0.1792
+  type: 'test'
+  ...
+# Subtest: minute returns use completed bars only and exact 1/5 minute intervals
+ok 29 - minute returns use completed bars only and exact 1/5 minute intervals
+  ---
+  duration_ms: 2.9932
+  type: 'test'
+  ...
+# Subtest: stale or missing adjacent minute bars never become invented signals
+ok 30 - stale or missing adjacent minute bars never become invented signals
+  ---
+  duration_ms: 0.7772
+  type: 'test'
+  ...
+# Subtest: domestic movers match master codes and preserve reasons without using rank price as quote
+ok 31 - domestic movers match master codes and preserve reasons without using rank price as quote
+  ---
+  duration_ms: 3.4776
+  type: 'test'
+  ...
+# Subtest: halted, managed, unknown and non-rising stocks are excluded from mover lists
+ok 32 - halted, managed, unknown and non-rising stocks are excluded from mover lists
+  ---
+  duration_ms: 0.4116
+  type: 'test'
+  ...
+# Subtest: ranked domestic movers are retained even when news and rotation contain same symbol
+ok 33 - ranked domestic movers are retained even when news and rotation contain same symbol
+  ---
+  duration_ms: 0.4953
+  type: 'test'
+  ...
+# Subtest: generic placeholder and unrelated company headlines do not authorize trades
+ok 34 - generic placeholder and unrelated company headlines do not authorize trades
+  ---
+  duration_ms: 1.3337
+  type: 'test'
+  ...
+# Subtest: virtual flows start after purchase, split markets and preserve actual quote time
+ok 35 - virtual flows start after purchase, split markets and preserve actual quote time
+  ---
+  duration_ms: 2.322
+  type: 'test'
+  ...
+# Subtest: virtual flow bounds history and never fabricates missing prices
+ok 36 - virtual flow bounds history and never fabricates missing prices
+  ---
+  duration_ms: 27.7775
+  type: 'test'
+  ...
+# Subtest: virtual orders use whole shares and wait when budget cannot buy one
+ok 37 - virtual orders use whole shares and wait when budget cannot buy one
+  ---
+  duration_ms: 1.1033
+  type: 'test'
+  ...
+# Subtest: paper constant prices conserve principal; final liquidation is explicit
+ok 38 - paper constant prices conserve principal; final liquidation is explicit
+  ---
+  duration_ms: 4.027
+  type: 'test'
+  ...
+# Subtest: paper both entry and exit costs reduce constant-price balance
+ok 39 - paper both entry and exit costs reduce constant-price balance
+  ---
+  duration_ms: 0.8813
+  type: 'test'
+  ...
+# Subtest: paper integer shares leave unaffordable capital in cash
+ok 40 - paper integer shares leave unaffordable capital in cash
+  ---
+  duration_ms: 0.5966
+  type: 'test'
+  ...
+# Subtest: paper fractional assumption permits small capital without real broker support
+ok 41 - paper fractional assumption permits small capital without real broker support
+  ---
+  duration_ms: 0.5844
+  type: 'test'
+  ...
+# Subtest: paper avoids same-day lookahead when entering a rising signal
+ok 42 - paper avoids same-day lookahead when entering a rising signal
+  ---
+  duration_ms: 0.7408
+  type: 'test'
+  ...
+# Subtest: paper changing future prices does not rewrite earlier trades or equity
+ok 43 - paper changing future prices does not rewrite earlier trades or equity
+  ---
+  duration_ms: 2.0649
+  type: 'test'
+  ...
+# Subtest: paper 5% buy latch is not misrepresented as a loss floor
+ok 44 - paper 5% buy latch is not misrepresented as a loss floor
+  ---
+  duration_ms: 0.733
+  type: 'test'
+  ...
+# Subtest: paper historical FX is used, not current FX
+ok 45 - paper historical FX is used, not current FX
+  ---
+  duration_ms: 0.733
+  type: 'test'
+  ...
+# Subtest: paper Korean trades work without foreign rates
+ok 46 - paper Korean trades work without foreign rates
+  ---
+  duration_ms: 0.4993
+  type: 'test'
+  ...
+# Subtest: paper validates money, periods, costs, strategy and tickers
+ok 47 - paper validates money, periods, costs, strategy and tickers
+  ---
+  duration_ms: 0.516
+  type: 'test'
+  ...
+# Subtest: paper rejects insufficient data or unavailable historical exchange rates
+ok 48 - paper rejects insufficient data or unavailable historical exchange rates
+  ---
+  duration_ms: 1.33
+  type: 'test'
+  ...
+# Subtest: paper equal sleeves cannot borrow money from each other
+ok 49 - paper equal sleeves cannot borrow money from each other
+  ---
+  duration_ms: 0.7877
+  type: 'test'
+  ...
+# Subtest: paper persistence never changes real state, and restores last run
+ok 50 - paper persistence never changes real state, and restores last run
+  ---
+  duration_ms: 5.7243
+  type: 'test'
+  ...
+# Subtest: performance matches exits and includes both fees and converted KRW values
+ok 51 - performance matches exits and includes both fees and converted KRW values
+  ---
+  duration_ms: 1.1444
+  type: 'test'
+  ...
+# Subtest: empty, unmatched and breakeven records do not inflate wins
+ok 52 - empty, unmatched and breakeven records do not inflate wins
+  ---
+  duration_ms: 0.2419
+  type: 'test'
+  ...
+# Subtest: cooldown is per symbol, persists from sale time and expires at boundary
+ok 53 - cooldown is per symbol, persists from sale time and expires at boundary
+  ---
+  duration_ms: 1.9844
+  type: 'test'
+  ...
+# Subtest: virtual execution blocks reentry but permits selling and buying after cooldown
+ok 54 - virtual execution blocks reentry but permits selling and buying after cooldown
+  ---
+  duration_ms: 1.7325
+  type: 'test'
+  ...
+# Subtest: one-second quotes continue during AI analysis without overlapping requests
+ok 55 - one-second quotes continue during AI analysis without overlapping requests
+  ---
+  duration_ms: 4.9616
+  type: 'test'
+  ...
+# Subtest: late quote results cannot change a paused virtual account
+ok 56 - late quote results cannot change a paused virtual account
+  ---
+  duration_ms: 2.7673
+  type: 'test'
+  ...
+# Subtest: quote errors keep old prices and back off instead of hammering source
+ok 57 - quote errors keep old prices and back off instead of hammering source
+  ---
+  duration_ms: 2.1811
+  type: 'test'
+  ...
+# Subtest: risk rejects invalid or future balance timestamps
+ok 58 - risk rejects invalid or future balance timestamps
+  ---
+  duration_ms: 2.4259
+  type: 'test'
+  ...
+# Subtest: risk rejects incomplete numerical balances and buy capacity
+ok 59 - risk rejects incomplete numerical balances and buy capacity
+  ---
+  duration_ms: 0.3319
+  type: 'test'
+  ...
+# Subtest: risk rejects invalid budget, original capital and sellable shares
+ok 60 - risk rejects invalid budget, original capital and sellable shares
+  ---
+  duration_ms: 0.1645
+  type: 'test'
+  ...
+# Subtest: damaged paper history does not stop app construction and cannot be overwritten
+ok 61 - damaged paper history does not stop app construction and cannot be overwritten
+  ---
+  duration_ms: 9.4191
+  type: 'test'
+  ...
+# Subtest: stale AI cannot override quote failure or current rule analysis
+ok 62 - stale AI cannot override quote failure or current rule analysis
+  ---
+  duration_ms: 0.986
+  type: 'test'
+  ...
+# Subtest: failed local AI refresh clears previous opinions
+ok 63 - failed local AI refresh clears previous opinions
+  ---
+  duration_ms: 0.8919
+  type: 'test'
+  ...
+# Subtest: approval is single-use and tied to the reviewed immutable order
+ok 64 - approval is single-use and tied to the reviewed immutable order
+  ---
+  duration_ms: 2.0621
+  type: 'test'
+  ...
+# Subtest: approval expires after 90 seconds; clearing invalidates all previews
+ok 65 - approval expires after 90 seconds; clearing invalidates all previews
+  ---
+  duration_ms: 0.4243
+  type: 'test'
+  ...
+# Subtest: 5% loss blocks buys at exact boundary; sell remains possible
+ok 66 - 5% loss blocks buys at exact boundary; sell remains possible
+  ---
+  duration_ms: 1.7546
+  type: 'test'
+  ...
+# Subtest: loss latch survives recovery, deposit and restart
+ok 67 - loss latch survives recovery, deposit and restart
+  ---
+  duration_ms: 0.2683
+  type: 'test'
+  ...
+# Subtest: deposit does not create profit
+ok 68 - deposit does not create profit
+  ---
+  duration_ms: 0.18
+  type: 'test'
+  ...
+# Subtest: withdrawal does not create loss
+ok 69 - withdrawal does not create loss
+  ---
+  duration_ms: 0.1354
+  type: 'test'
+  ...
+# Subtest: pending cash transfer blocks orders and defers loss calculation
+ok 70 - pending cash transfer blocks orders and defers loss calculation
+  ---
+  duration_ms: 0.1813
+  type: 'test'
+  ...
+# Subtest: missing or stale account information fails closed
+ok 71 - missing or stale account information fails closed
+  ---
+  duration_ms: 0.1735
+  type: 'test'
+  ...
+# Subtest: integer quantities, positive finite limits and known symbols only
+ok 72 - integer quantities, positive finite limits and known symbols only
+  ---
+  duration_ms: 0.2713
+  type: 'test'
+  ...
+# Subtest: no leverage, excess budgets, insufficient funds or short sells
+ok 73 - no leverage, excess budgets, insufficient funds or short sells
+  ---
+  duration_ms: 0.4428
+  type: 'test'
+  ...
+# Subtest: unknown/accepted/partial orders stop subsequent submissions
+ok 74 - unknown/accepted/partial orders stop subsequent submissions
+  ---
+  duration_ms: 0.3115
+  type: 'test'
+  ...
+# Subtest: arming and principal required
+ok 75 - arming and principal required
+  ---
+  duration_ms: 0.1669
+  type: 'test'
+  ...
+# Subtest: KIS order mappings keep exact reviewed side, quantity and price
+ok 76 - KIS order mappings keep exact reviewed side, quantity and price
+  ---
+  duration_ms: 0.2339
+  type: 'test'
+  ...
+# Subtest: incomplete combined account schema is rejected, not silently zero
+ok 77 - incomplete combined account schema is rejected, not silently zero
+  ---
+  duration_ms: 0.2739
+  type: 'test'
+  ...
+# Subtest: credentials reject malformed environments and account numbers
+ok 78 - credentials reject malformed environments and account numbers
+  ---
+  duration_ms: 0.1664
+  type: 'test'
+  ...
+# Subtest: broker uncertain network result is never retried
+ok 79 - broker uncertain network result is never retried
+  ---
+  duration_ms: 555.3318
+  type: 'test'
+  ...
+# Subtest: mock broker order sends authentication, hash and one exact limit order
+ok 80 - mock broker order sends authentication, hash and one exact limit order
+  ---
+  duration_ms: 575.0455
+  type: 'test'
+  ...
+# Subtest: failed quote refresh cannot produce a fresh buy opinion
+ok 81 - failed quote refresh cannot produce a fresh buy opinion
+  ---
+  duration_ms: 0.4364
+  type: 'test'
+  ...
+# Subtest: RSS rejects unsafe links and preserves source, symbol and time
+ok 82 - RSS rejects unsafe links and preserves source, symbol and time
+  ---
+  duration_ms: 1.5844
+  type: 'test'
+  ...
+# Subtest: YouTube RSS is labeled metadata, not transcript evidence
+ok 83 - YouTube RSS is labeled metadata, not transcript evidence
+  ---
+  duration_ms: 0.6996
+  type: 'test'
+  ...
+# Subtest: headline rule does not emit an order or fake probability
+ok 84 - headline rule does not emit an order or fake probability
+  ---
+  duration_ms: 0.2439
+  type: 'test'
+  ...
+# Subtest: atomic store persists locks; corrupt files never reset capital
+ok 85 - atomic store persists locks; corrupt files never reset capital
+  ---
+  duration_ms: 4.1343
+  type: 'test'
+  ...
+# Subtest: Windows DPAPI encrypts and decrypts test-only secrets
+ok 86 - Windows DPAPI encrypts and decrypts test-only secrets
+  ---
+  duration_ms: 394.4256
+  type: 'test'
+  ...
+# Subtest: automatic selection cannot see returns inside simulation window
+ok 87 - automatic selection cannot see returns inside simulation window
+  ---
+  duration_ms: 4.0508
+  type: 'test'
+  ...
+# Subtest: automatic selection and simulation share the exact evaluation calendar
+ok 88 - automatic selection and simulation share the exact evaluation calendar
+  ---
+  duration_ms: 2.5222
+  type: 'test'
+  ...
+# Subtest: automatic selection rejects incomplete candidate history
+ok 89 - automatic selection rejects incomplete candidate history
+  ---
+  duration_ms: 1.6818
+  type: 'test'
+  ...
+# Subtest: KR stream parses market timestamp and price, not order acceptance
+ok 90 - KR stream parses market timestamp and price, not order acceptance
+  ---
+  duration_ms: 1.1622
+  type: 'test'
+  ...
+# Subtest: US stream supports official 25-field and legacy 26-field layouts
+ok 91 - US stream supports official 25-field and legacy 26-field layouts
+  ---
+  duration_ms: 0.2247
+  type: 'test'
+  ...
+# Subtest: stream subscriptions separate Korea and US exchange codes
+ok 92 - stream subscriptions separate Korea and US exchange codes
+  ---
+  duration_ms: 0.138
+  type: 'test'
+  ...
+# Subtest: one-second samples start only with holdings, preserve stale prices, and split currencies
+ok 93 - one-second samples start only with holdings, preserve stale prices, and split currencies
+  ---
+  duration_ms: 3.2931
+  type: 'test'
+  ...
+# Subtest: missing purchase price never becomes zero cost or fabricated profit
+ok 94 - missing purchase price never becomes zero cost or fabricated profit
+  ---
+  duration_ms: 1.3059
+  type: 'test'
+  ...
+# Subtest: quote connection sends subscription messages only and hides credential material from status
+ok 95 - quote connection sends subscription messages only and hides credential material from status
+  ---
+  duration_ms: 15.5656
+  type: 'test'
+  ...
+# Subtest: FX changes update foreign valuation even when stock quote is older
+ok 96 - FX changes update foreign valuation even when stock quote is older
+  ---
+  duration_ms: 1.3803
+  type: 'test'
+  ...
+# Subtest: AI decision uses minute execution quote and does not rely on old valuation flag
+ok 97 - AI decision uses minute execution quote and does not rely on old valuation flag
+  ---
+  duration_ms: 3.6502
+  type: 'test'
+  ...
+# Subtest: hold decisions do not request execution prices
+ok 98 - hold decisions do not request execution prices
+  ---
+  duration_ms: 2.4488
+  type: 'test'
+  ...
+# Subtest: pause during execution quote prevents both mark and simulated fill
+ok 99 - pause during execution quote prevents both mark and simulated fill
+  ---
+  duration_ms: 3.0306
+  type: 'test'
+  ...
+# Subtest: discovery carries failed quote reasons through status instead of silent omission
+ok 100 - discovery carries failed quote reasons through status instead of silent omission
+  ---
+  duration_ms: 0.6937
+  type: 'test'
+  ...
+# Subtest: fresh supplied price evidence permits sell without news but does not permit news-free buy
+ok 101 - fresh supplied price evidence permits sell without news but does not permit news-free buy
+  ---
+  duration_ms: 1.6777
+  type: 'test'
+  ...
+# Subtest: stale price evidence is not a sell authorization
+ok 102 - stale price evidence is not a sell authorization
+  ---
+  duration_ms: 0.1535
+  type: 'test'
+  ...
+# Subtest: quota exhaustion keeps virtual valuation running and skips AI requests
+ok 103 - quota exhaustion keeps virtual valuation running and skips AI requests
+  ---
+  duration_ms: 1.3072
+  type: 'test'
+  ...
+# Subtest: increasing API budget requires explicit cost acknowledgement and persists only valid input
+ok 104 - increasing API budget requires explicit cost acknowledgement and persists only valid input
+  ---
+  duration_ms: 1.5674
+  type: 'test'
+  ...
+# Subtest: paper fill costs obey configurable adverse slippage and fee assumptions
+ok 105 - paper fill costs obey configurable adverse slippage and fee assumptions
+  ---
+  duration_ms: 0.8531
+  type: 'test'
+  ...
+# Subtest: domestic chart validates identity, derives minute volume and excludes extended hours
+ok 106 - domestic chart validates identity, derives minute volume and excludes extended hours
+  ---
+  duration_ms: 0.5361
+  type: 'test'
+  ...
+# Subtest: minute-based held sell flows through AI validation to virtual ledger with no headlines
+ok 107 - minute-based held sell flows through AI validation to virtual ledger with no headlines
+  ---
+  duration_ms: 2.2659
+  type: 'test'
+  ...
+1..107
+# tests 107
+# suites 0
+# pass 107
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1710.7245

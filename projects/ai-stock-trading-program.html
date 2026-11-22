@@ -33,11 +33,11 @@
         <p class="project-lede">한국·미국 주식의 시세·뉴스와 Gemini 판단을 연결한 Windows 데스크톱 앱. AI 응답을 실제 서비스 흐름에 연결하면서 장부 분리, 주문 검증, 오류 처리를 구현한 프로젝트입니다.</p>
         <div class="project-meta">
           <a href="https://github.com/minkim7529/ai-stock-trading-program" class="btn primary" target="_blank" rel="noopener">GitHub 소스와 실행 안내</a>
-          <span class="badge">공개 버전 1.6.2</span>
+          <span class="badge">공개 버전 1.10.0</span>
         </div>
         <ul class="tags"><li>JavaScript / Node.js</li><li>Electron</li><li>Gemini API</li><li>KIS API</li><li>node:test</li></ul>
         <div class="stats">
-          <div class="stat"><span class="n mono">79 / 79</span><span class="l">2026.11.14 자동 테스트 통과</span></div>
+          <div class="stat"><span class="n mono">107 / 107</span><span class="l">2026.11.22 자동 테스트 통과</span></div>
           <div class="stat"><span class="n mono">KR · US</span><span class="l">시장·통화별 장부와 화면 구분</span></div>
           <div class="stat"><span class="n mono">Electron</span><span class="l">Windows 데스크톱 UI</span></div>
           <div class="stat"><span class="n mono">Gemini</span><span class="l">기사 제목과 시세 기반 판단</span></div>
@@ -57,12 +57,12 @@
         </ul>
         <h2>기술적 결정</h2>
         <ul class="list">
-          <li>AI가 반환한 판단을 검증한 뒤 실행 단계에 전달하도록 구성했습니다.</li>
+          <li>Gemini가 매수를 제안해도 입력 뉴스에 존재하는 근거 ID가 하나도 없으면 그 제안을 제외합니다. 중복 종목과 허용 목록 밖의 행동도 걸러냅니다. <a href="https://github.com/minkim7529/ai-stock-trading-program/blob/c819b2ce1bc6b4c4fecc42fb5cb57cead254dee7/src/live.js#L14">응답 검증 함수 보기</a></li>
           <li>주문 결과가 불명확할 때 자동으로 재주문하지 않으며, 재실행 후 자동 운용은 꺼진 상태로 복원합니다.</li>
           <li>시장별 정규장 시간과 시세 시각을 확인하고, 국내·해외 손익을 각 통화로 표시합니다.</li>
         </ul>
         <h2>검증 결과와 범위</h2>
-        <p>2026년 11월 14일 공개 소스 <code class="inline">9098cee</code>, Node.js 24.19.0에서 <code class="inline">node --test tests/*.test.js</code>를 실행해 79개 테스트가 모두 통과했습니다. 테스트는 가짜 키·응답과 임시 장부를 사용합니다.</p>
+        <p>2026년 11월 22일 공개 소스 <code class="inline">c819b2c</code>, Node.js 24.19.0에서 <code class="inline">node --test tests/*.test.js</code>를 실행해 107개 테스트가 모두 통과했습니다. 테스트는 가짜 키·응답과 임시 장부를 사용합니다. <a href="../evidence/stockpilot-tests-2026-11-22.txt">107개 테스트 실행 로그</a></p>
         <p>위험 제한, 주문 경합, 장부 분리, 시세 처리 등을 검증한 결과이며 실제 계좌 인증·주문·체결의 종단 간 검증이나 투자 성과를 뜻하지 않습니다.</p>
         <div class="project-meta"><a class="btn secondary" href="https://github.com/minkim7529/ai-stock-trading-program/tree/main/tests" target="_blank" rel="noopener">자동 테스트 코드 보기</a></div>
         <h2>현재 한계</h2>

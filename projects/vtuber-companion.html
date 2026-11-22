@@ -47,11 +47,17 @@
         </ul>
 
         <div class="stats">
-          <div class="stat"><span class="n mono">252</span><span class="l">줄, Ollama 네이티브 백엔드 신규 작성</span></div>
+          <div class="stat"><span class="n mono">252</span><span class="l">줄, Ollama 네이티브 백엔드 확장</span></div>
           <div class="stat"><span class="n mono">4</span><span class="l">가지 소형 모델 실패 유형에 대응</span></div>
           <div class="stat"><span class="n mono">7B</span><span class="l">규모 로컬 모델 (Qwen계열) 기준 튜닝</span></div>
           <div class="stat"><span class="n mono">Ollama ↔ Gemini</span><span class="l">같은 페르소나·프롬프트로 로컬/클라우드 백엔드 교체 실험</span></div>
         </div>
+
+        <h2 id="guard-eval">어떤 대사를 잘못 고칠까?</h2>
+        <p>하루는 여동생이고 사용자는 오빠입니다. 정체성 가드는 완성된 문장에서 역할이 뒤집힌 표현을 찾아 대체 대사를 선택합니다. 이번 포트폴리오 검토에서는 공개 패치에서 정규식을 읽어, 검토용으로 작성한 문장 20개에 적용했습니다.</p>
+        <ul class="list"><li>역할을 뒤집은 10개 중 7개를 탐지했습니다. “내 여동생은 바로 너야.”처럼 어순이 바뀐 표현을 포함해 3개를 놓쳤습니다.</li><li>그대로 읽어야 할 10개 중 6개를 유지했습니다. “내가 오빠한테 간식을 줄게.”를 포함한 4개는 잘못 차단했습니다.</li></ul>
+        <p>규칙의 오탐과 누락을 살펴보기 위해 고른 합성 사례입니다. 실제 대화에서의 발생률과 모델 변경 전후의 응답 품질은 별도 평가가 필요합니다.</p>
+        <p><a href="https://github.com/minkim7529/vtuber-ollama-gemini-experiments/blob/e60a309113a58035bb9993677c103e9f2608773b/my-changes.patch">원본 패치</a> · <a href="../evidence/guard-cases.tsv">문장과 기대 판정</a> · <a href="../evidence/check_guard.py">재현 스크립트</a></p>
 
         <h2>개요</h2>
         <p>
@@ -94,10 +100,10 @@
         <h2>주요 기능 — 그 위에서 직접 만든 것</h2>
         <ul class="list">
           <li>
-            <b>Ollama 네이티브 백엔드 (<code class="inline">ollama_llm.py</code>, 신규 252줄)</b> —
+            <b>Ollama 네이티브 백엔드 (<code class="inline">ollama_llm.py</code>, 252줄 추가)</b> —
             OpenAI 호환 엔드포인트 대신 Ollama의 네이티브 <code class="inline">/api/chat</code>를
             직접 사용해 <code class="inline">think:false</code>로 Qwen3 계열의 추론 트레이스를
-            확실히 꺼서 답변 하나당 150여 토큰을 절약했습니다. 스트리밍 파싱, 비전
+            끄도록 설정했습니다. 스트리밍 파싱, 비전
             모델용 이미지 다운스케일(최대 1024px), 모델 preload/keep-alive/unload
             생명주기 관리, 툴 호출 시 OpenAI 호환 경로로의 폴백까지 포함합니다.
           </li>
@@ -261,7 +267,7 @@ PROACTIVE_SPEAK_STYLE_NOTE = (
           <b>검증한 것 vs 버린 것</b> — 능동 발화의 표현 다양성을 위해 temperature를
           기본값보다 올리는 실험(+0.3/+0.9, +0.1/+0.8)을 진행했으나, 낮은 폭에서도
           이모지 열거·문장 붕괴 등 일관성 저하만 관찰되고 반복 감소 효과는
-          기본 temperature와 통계적으로 다르지 않았습니다. 위험 대비 이득이 없다고
+          제 실험에서는 뚜렷하지 않았습니다. 위험 대비 이득이 없다고
           판단해 되돌렸습니다 — 코드에 그대로 남겨 다음에 같은 실험을 반복하지
           않도록 기록해 두었습니다.
         </div>
@@ -294,8 +300,7 @@ PROACTIVE_SPEAK_STYLE_NOTE = (
           매번 새로 무작위 추출하다 보니 20% 확률로 직전 턴과 같은 변형이
           다시 뽑히고, 같은 지시에는 모델이 같은 응답을 내놓기 때문이었습니다.
           클라이언트별로 직전에 뽑힌 인덱스를 기억해두고 다음 추출에서
-          제외하는 방식으로 반복을 원천 차단했고, 이후 대화 로그에서 연속
-          반복이 사라진 것을 확인했습니다.
+          제외하도록 바꿨습니다. 이 방식은 같은 상황 지시가 연속해서 선택되는 것을 막습니다.
         </p>
       </article>
     </main>

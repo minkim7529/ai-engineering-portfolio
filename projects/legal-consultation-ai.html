@@ -52,7 +52,7 @@
         </div>
 
         <div class="stats">
-          <div class="stat"><span class="n mono">53,480</span><span class="l">건, 정제된 민·형사 법률 질의응답 학습 데이터</span></div>
+          <div class="stat"><span class="n mono">53,480</span><span class="l">건, 학습에 사용한 법률 질의응답 학습 데이터</span></div>
           <div class="stat"><span class="n mono">1,671</span><span class="l">step, 최종 학습(1 epoch) 소요 스텝</span></div>
           <div class="stat"><span class="n mono">1.5e-5</span><span class="l">최종 학습률, LoRA r=16</span></div>
           <div class="stat"><span class="n mono">A100</span><span class="l">40GB VRAM, Colab Pro GPU로 학습 진행</span></div>
@@ -142,11 +142,7 @@
 
         <h2>모델 아키텍처 — Llama 3.1</h2>
         <p>
-          Meta가 공개한 오픈소스 LLM으로 8B/70B 파라미터 버전이 있으며, 오픈
-          모델임에도 GPT-4급 성능을 지향합니다. Hugging Face·AWS·Azure·NVIDIA와의
-          협업으로 누구나 연구·상업적으로 활용할 수 있게 배포되어 있고,
-          커스터마이징과 파인튜닝을 통한 특화 활용에 적합하게 설계되어 있어
-          도메인 특화 챗봇을 만들기에 적당하다고 판단해 선택했습니다.
+          Llama 3.1 8B Instruct를 4비트로 불러오고 어텐션의 q_proj와 v_proj에 LoRA를 적용했습니다. 단일 GPU에서 학습할 파라미터 수를 약 682만 개로 제한한 구성입니다.
         </p>
         <ul class="list">
           <li>decoder-only 구조의 Transformer 계열 모델</li>
@@ -174,7 +170,9 @@
           <figcaption>그림 2. 모델별 성능 비교 — Llama 3 8B가 대부분의 항목에서 우위</figcaption>
         </figure>
 
-        <h2>학습 기록 — 초기 실험과 최종 공개 버전</h2>
+        <h2 id="training">학습 기록 — 초기 실험과 최종 공개 버전</h2>
+        <p><a href="https://github.com/minkim7529/legal-consultation-ai/blob/465636181e98dcc245a76e8473e2a06f2f5f793d/%EB%B2%95%EB%A5%A0_%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B_%ED%95%99%EC%8A%B5.ipynb">학습 노트북과 실행 로그</a> · <a href="https://github.com/minkim7529/legal-consultation-ai/blob/465636181e98dcc245a76e8473e2a06f2f5f793d/model-adapter-config/adapter_config.json">LoRA 설정</a> · <a href="https://github.com/minkim7529/legal-consultation-ai/blob/465636181e98dcc245a76e8473e2a06f2f5f793d/%EB%B2%95%EB%A5%A0%EC%83%81%EB%8B%B4%EC%82%AC%EC%9D%B4%ED%8A%B8_%EC%B5%9C%EC%A2%85.ipynb">Gradio 서빙 코드</a></p>
+        <p>공개 로그는 53,480건의 학습과 1,671스텝 완료를 기록합니다. 독립 평가셋에서의 법률 답변 정확도 개선 폭은 미측정입니다.</p>
         <p>
           <code class="inline">unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit</code>
           4bit 모델을 Unsloth의 <code class="inline">FastLanguageModel</code>로 불러온 뒤

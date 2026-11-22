@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Daily — 김민석 포트폴리오</title>
+<meta name="description" content="FastAPI와 SQLite로 구현한 뉴스·논문 수집 대시보드" />
+<link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" />
+<link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <nav class="sitebar" id="sitebar">
+    <a href="../index.html" class="brand">김민석 / AI ENGINEER</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="테마 전환" title="라이트/다크 테마 전환">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+    </button>
+  </nav>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebarMount" data-base="../" data-active="ai-daily"></aside>
+
+    <main class="main">
+      <a class="back-link" href="../index.html">← 홈으로</a>
+
+      <article class="project-page reveal">
+        <p class="project-kicker">AI Daily</p>
+        <h1>뉴스·논문 수집 대시보드</h1>
+        <p class="project-lede">AI 관련 기사와 논문을 한 곳에서 읽을 수 있도록 RSS와 공개 API를 연결했습니다. 수집기, SQLite 저장소, FastAPI 조회 API, 웹 대시보드 순서로 데이터가 흐릅니다.</p>
+        <h2>같은 기사가 여러 번 들어오면</h2>
+        <p>서로 다른 갱신 시점에 같은 기사가 들어와도 URL에 고유 제약을 둔 SQLite 테이블에 한 번만 저장합니다. 화면은 카테고리별 목록 API에서 항목을 읽습니다. <a href="https://github.com/minkim7529/ai-daily/blob/10de4b4a4d784844d360123c672d9339c70101ae/backend/database.py">저장·조회 코드</a></p>
+        <h2>서버가 수집 시간을 놓치면</h2>
+        <p>시작 시 마지막 갱신 시각을 확인하고 12시간보다 오래된 경우 백그라운드 수집을 시작합니다. 수동 새로고침이 겹치면 이미 실행 중이라는 상태를 반환합니다. <a href="https://github.com/minkim7529/ai-daily/blob/10de4b4a4d784844d360123c672d9339c70101ae/backend/main.py">시작 처리와 API 코드</a></p>
+        <p><a href="https://github.com/minkim7529/ai-daily">전체 소스와 로컬 실행 방법</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="../js/main.js"></script>
+</body>
+</html>
